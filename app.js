@@ -281,7 +281,9 @@
     const speed = parseFloat(k.dataset.speed || '0.5');
     const half = `<b>${text}</b>`.repeat(4);
     k.innerHTML = `<span style="display:flex">${half}</span><span style="display:flex" aria-hidden="true">${half}</span>`;
-    k.style.setProperty('--ghost-dur', `${Math.round(56 / Math.abs(speed))}s`);
+    const PXPS = 42; /* 全ティッカー共通のピクセル速度 */
+    const halfW = k.firstElementChild.offsetWidth || 2000;
+    k.style.setProperty('--ghost-dur', `${Math.round(halfW / PXPS)}s`);
     if (speed < 0) k.classList.add('rev');
   });
 

@@ -244,7 +244,7 @@ img, video, svg { display: block; max-width: 100%; }
   left: 0;
   display: flex;
   font-family: var(--en);
-  font-size: clamp(4.2rem, 11vw, 10rem);
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
   font-weight: 800;
   letter-spacing: -0.035em;
   line-height: 1;
@@ -263,7 +263,7 @@ img, video, svg { display: block; max-width: 100%; }
 .kinetic.outline { color: rgba(15, 15, 14, 0.045); }
 .statement { overflow: hidden; }
 .cv-block { position: relative; overflow: visible; }
-.cv-block .kinetic { top: -1.2rem; }
+.cv-block .kinetic { top: 0.5rem; }
 
 /* ═══ STATEMENT ═══ */
 .statement {
@@ -2277,7 +2277,5 @@ body.menu-open .brand-mark { filter: none; }
 /* ラベル拡大版・小型ゴースト */
 .sec-label.lg { font-size: clamp(0.95rem, 1.5vw, 1.15rem); letter-spacing: 0.3em; }
 .sec-label.lg::after { width: 4rem; }
-.kinetic.sm { font-size: clamp(2.6rem, 6.5vw, 5.5rem); }
 .sec-head.sp-top { margin-top: clamp(5rem, 10vw, 9rem); }
-.kinetic.md { font-size: clamp(3.2rem, 8vw, 7rem); }
 .msg-sign2 .ms-photo { width: clamp(180px, 20vw, 240px); }
