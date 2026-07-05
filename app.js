@@ -167,16 +167,6 @@
     })();
   })();
 
-  /* ── 言語スイッチャー ── */
-  const langSw = document.getElementById('langSw');
-  if (langSw) {
-    langSw.querySelector('.lang-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      langSw.classList.toggle('open');
-    });
-    document.addEventListener('click', () => langSw.classList.remove('open'));
-  }
-
   /* ── モバイルメニュー ── */
   const menuBtn = document.getElementById('menuBtn');
   if (menuBtn) {
