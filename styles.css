@@ -1040,9 +1040,10 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 .wm-note {
   position: relative; z-index: 1;
   margin-top: 1.6rem;
-  font-size: var(--fs-small);
-  color: var(--gray);
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  color: var(--ink-70);
   letter-spacing: 0.05em;
+  line-height: 2.1;
 }
 @media (max-width: 700px) { .worldmap { aspect-ratio: 1.9 / 1; } .wm-label { font-size: 10px; } }
 
