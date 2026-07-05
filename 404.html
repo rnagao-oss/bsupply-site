@@ -10,7 +10,29 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="./assets/img/logo.png" rel="icon" type="image/png"/>
-<link href="./styles.css?v=20260742" rel="stylesheet"/>
+<link href="./styles.css?v=20260760" rel="stylesheet"/>
+<script>
+/* 旧サイト（WordPress）URLからのリダイレクト */
+(function () {
+  var p = location.pathname;
+  var en = p.slice(0, 4) === '/en/';
+  var path = en ? p.slice(3) : p;
+  var last = path.split('/').pop();
+  if (last.indexOf('.') !== -1) return; /* 新形式（拡張子付き）URLは404を表示 */
+  var root = en ? '/en/' : '/';
+  var rules = [
+    [/^\/(company|about|profile|corporate|gaiyou|outline)/i, 'company.html'],
+    [/^\/(contact|inquiry|otoiawase)/i, 'contact.html'],
+    [/^\/(recruit|career|jobs?|saiyo)/i, 'recruit.html'],
+    [/^\/(service|consult)/i, 'consulting.html'],
+    [/^\/(manufactur|factory|leather|craft)/i, 'manufacturing.html'],
+  ];
+  for (var i = 0; i < rules.length; i++) {
+    if (rules[i][0].test(path)) { location.replace(root + rules[i][1]); return; }
+  }
+  location.replace(root);
+})();
+</script>
 </head>
 <body class="subpage">
 <div aria-hidden="true" class="progress"><i id="progressBar"></i></div>
@@ -48,6 +70,6 @@
 </div>
 </section>
 </main>
-<script defer="" src="./app.js?v=20260742"></script>
+<script defer="" src="./app.js?v=20260760"></script>
 </body>
 </html>
