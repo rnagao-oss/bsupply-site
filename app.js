@@ -322,11 +322,15 @@
   document.querySelectorAll('.kinetic').forEach((k) => {
     const text = k.textContent.trim();
     const speed = parseFloat(k.dataset.speed || '0.5');
-    const half = `<b>${text}</b>`.repeat(4);
-    k.innerHTML = `<span style="display:flex">${half}</span><span style="display:flex" aria-hidden="true">${half}</span>`;
     const PXPS = Math.max(11, innerWidth / 34); /* 画面幅比の共通速度（モバイルでも同じ体感） */
-    const halfW = k.firstElementChild.offsetWidth || 2000;
-    k.style.setProperty('--ghost-dur', `${Math.round(halfW / PXPS)}s`);
+    k.innerHTML = `<span style="display:flex"><b>${text}</b></span>`;
+    const oneW = k.firstElementChild.offsetWidth || 2000;
+    /* 巨大レイヤーはiOS Safariの合成限界でカクつくため、複製は画面1.5枚分を満たす最小回数に抑える */
+    const reps = Math.max(1, Math.ceil((innerWidth * 1.5) / oneW));
+    const half = `<b>${text}</b>`.repeat(reps);
+    k.innerHTML = `<span style="display:flex">${half}</span><span style="display:flex" aria-hidden="true">${half}</span>`;
+    const halfW = k.firstElementChild.offsetWidth || oneW * reps;
+    k.style.setProperty('--ghost-dur', `${Math.max(1, Math.round(halfW / PXPS))}s`);
     if (speed < 0) k.classList.add('rev');
   });
 
@@ -402,9 +406,18 @@
     }, { threshold: 0.35 });
     orbitIO.observe(orbitWrap);
   }
+  /* 円をタップ→黒く反転→その事業の場所へ遷移 */
+  const NODE_DEST = { consulting: 'consulting.html', valueup: 'manufacturing.html' };
   document.querySelectorAll('.orbit-node').forEach((node) => {
     node.addEventListener('click', () => {
-      document.getElementById(node.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+      node.classList.add('tapped');
+      const dest = NODE_DEST[node.dataset.target];
+      if (dest) {
+        setTimeout(() => { location.href = dest; }, 420);
+      } else {
+        document.getElementById(node.dataset.target)?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => node.classList.remove('tapped'), 900);
+      }
     });
   });
 
