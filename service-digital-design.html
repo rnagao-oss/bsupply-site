@@ -1,126 +1,126 @@
 <!DOCTYPE html>
-<html lang="ja">
+
+<html data-root="." lang="ja">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>デジタル：設計・実行 ｜ 株式会社B supply</title>
-<meta name="description" content="KPIダッシュボード構築から管理会計基盤の実装、業務デジタル化まで。B supplyが経営数値の可視化と定着を一貫して支援します。" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-<link rel="icon" type="image/png" href="./assets/img/logo.png" />
-<link rel="stylesheet" href="./styles.css?v=20260723" />
-</head>
+<meta content="KPIダッシュボード構築から管理会計基盤の実装、業務デジタル化まで。B supplyが経営数値の可視化と定着を一貫して支援します。" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/img/logo.png" rel="icon" type="image/png"/>
+<link href="./styles.css?v=20260723" rel="stylesheet"/>
+
+
+
+
+
+
+<link href="https://rnagao-oss.github.io/bsupply-site/service-digital-design.html" hreflang="ja" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/en/service-digital-design.html" hreflang="en" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/it/service-digital-design.html" hreflang="it" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/fr/service-digital-design.html" hreflang="fr" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/ko/service-digital-design.html" hreflang="ko" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/zh/service-digital-design.html" hreflang="zh" rel="alternate"/>
+<link href="https://rnagao-oss.github.io/bsupply-site/service-digital-design.html" hreflang="x-default" rel="alternate"/></head>
 <body class="subpage">
-
-<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
-<canvas class="ambient-dots" id="ambientDots" aria-hidden="true"></canvas>
-
+<div aria-hidden="true" class="progress"><i id="progressBar"></i></div>
+<canvas aria-hidden="true" class="ambient-dots" id="ambientDots"></canvas>
 <header class="site-header light" id="siteHeader">
-  <a class="brand" href="./index.html"><img class="brand-mark" src="./assets/img/logo.png" alt="" />B supply</a>
-  <nav>
-    <a href="./index.html">Home</a>
-    <a href="./consulting.html">Consulting</a>
-    <a href="./manufacturing.html">Manufacturing</a>
-    <a href="./recruit.html">Recruit</a>
-    <a href="./company.html">Company</a>
-    <a href="./contact.html" class="nav-cta">Contact</a>
-  </nav>
-  <button class="menu-btn" id="menuBtn" type="button" aria-label="メニュー"><i></i><i></i></button>
+<a class="brand" href="./index.html"><img alt="" class="brand-mark" src="./assets/img/logo.png"/>B supply</a>
+<nav>
+<a href="./index.html">Home</a>
+<a href="./consulting.html">Consulting</a>
+<a href="./manufacturing.html">Manufacturing</a>
+<a href="./recruit.html">Recruit</a>
+<a href="./company.html">Company</a>
+<a class="nav-cta" href="./contact.html">Contact</a>
+<div class="lang-sw" id="langSw"><button aria-label="Language" class="lang-btn" type="button">JA</button><div class="lang-menu"><a class="cur" href="./service-digital-design.html">日本語</a><a href="./en/service-digital-design.html">English</a><a href="./it/service-digital-design.html">Italiano</a><a href="./fr/service-digital-design.html">Français</a><a href="./ko/service-digital-design.html">한국어</a><a href="./zh/service-digital-design.html">中文</a></div></div></nav>
+<button aria-label="メニュー" class="menu-btn" id="menuBtn" type="button"><i></i><i></i></button>
 </header>
-
 <div class="mobile-menu" id="mobileMenu">
-  <nav>
-    <a href="./index.html">Home<em>ホーム</em></a>
-    <a href="./consulting.html">Consulting<em>コンサルティング</em></a>
-    <a href="./manufacturing.html">Manufacturing<em>革製造事業</em></a>
-    <a href="./recruit.html">Recruit<em>採用情報</em></a>
-    <a href="./company.html">Company<em>会社概要</em></a>
-    <a href="./contact.html">Contact<em>お問い合わせ</em></a>
-  </nav>
-</div>
-
+<nav>
+<a href="./index.html">Home<em>ホーム</em></a>
+<a href="./consulting.html">Consulting<em>コンサルティング</em></a>
+<a href="./manufacturing.html">Manufacturing<em>革製造事業</em></a>
+<a href="./recruit.html">Recruit<em>採用情報</em></a>
+<a href="./company.html">Company<em>会社概要</em></a>
+<a href="./contact.html">Contact<em>お問い合わせ</em></a>
+</nav>
+<div class="mm-lang"><a class="cur" href="./service-digital-design.html">日本語</a><a href="./en/service-digital-design.html">English</a><a href="./it/service-digital-design.html">Italiano</a><a href="./fr/service-digital-design.html">Français</a><a href="./ko/service-digital-design.html">한국어</a><a href="./zh/service-digital-design.html">中文</a></div></div>
 <main>
-  <section class="page-hero">
-    <p class="sec-label"><i>SERVICE</i>DIGITAL DESIGN &amp; IMPLEMENTATION</p>
-    <h1 class="page-title" data-split>デジタル：設計・実行</h1>
-    <p class="sec-lede">経営数値が見えなければ、投資判断はスピードを失います。</p>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <p class="sd-lead reveal-el">B supplyは、経営数値を「見える化」し、日々の意思決定に使える状態へと変えることを支援します。KPIダッシュボードの設計から管理会計基盤の実装、既存業務のデジタル化、そして現場に根づくツール導入まで、構想だけで終わらせず実装まで一貫して伴走します。私たち自身も自己勘定で事業を経営する当事者として、現場で使われる仕組みかどうかにこだわります。</p>
-  </section>
-
-  <section class="section">
-    <div class="sec-head">
-      <p class="sec-label"><i>01</i>SOLUTIONS ── ソリューション</p>
-    </div>
-    <div class="sd-sols">
-        <div class="sd-sol reveal-el"><h3>KPIダッシュボード構築</h3><p>経営判断に必要な指標を定義し、日次・月次で追える形に可視化します。</p></div>
-        <div class="sd-sol reveal-el"><h3>管理会計基盤の実装</h3><p>事業拡大に耐える管理会計の仕組みを設計し、経営数値を継続的に把握できる基盤を構築します。</p></div>
-        <div class="sd-sol reveal-el"><h3>業務プロセスのデジタル化</h3><p>属人化した業務やリサーチ工数を仕組み化し、人が本来の業務に集中できる状態をつくります。</p></div>
-        <div class="sd-sol reveal-el"><h3>ツール選定・導入・定着</h3><p>目的に合ったツールを選定し、導入だけでなく現場での定着まで支援します。</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="sec-head">
-      <p class="sec-label"><i>02</i>APPROACH ── 私たちの支援の特徴</p>
-    </div>
-    <div class="sd-appr">
-        <div class="sd-ap reveal-el"><h3>構想で終わらせない実行伴走</h3><p>設計図を描くだけでなく、ダッシュボードや基盤が実際に稼働する状態まで伴走します。</p></div>
-        <div class="sd-ap reveal-el"><h3>経営の当事者としての視点</h3><p>自ら事業を経営する立場から、現場で本当に使われる仕組みかどうかを基準に設計します。</p></div>
-        <div class="sd-ap reveal-el"><h3>属人化の解消を起点にした設計</h3><p>特定の担当者に依存していた業務やソーシングの工程を、仕組みとして再現可能な形に落とし込みます。</p></div>
-        <div class="sd-ap reveal-el"><h3>戦略と実装の一貫支援</h3><p>経営管理の方針検討から具体的なツール導入・運用定着まで、切れ目なく支援します。</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="sec-head">
-      <p class="sec-label"><i>03</i>BEST PRACTICE ── 関連事例</p>
-    </div>
-    <div class="bp-grid">
-        <a class="bp-card" href="./case-02.html">
-          <div class="case-tags"><span class="tag-theme">営業戦略</span><span class="tag-ind">M&amp;A仲介</span></div>
-          <h3>M&amp;A仲介企業の営業戦略策定</h3>
-          <p class="bp-lead">案件ソーシングの属人化とリサーチ工数の圧迫により、成約活動に十分な時間を割けないM&amp;A仲介企業を支援しました。</p>
-          <span class="bp-more">VIEW MORE<em>→</em></span>
-        </a>
-        <a class="bp-card" href="./case-05.html">
-          <div class="case-tags"><span class="tag-theme">経営管理</span><span class="tag-ind">土木IT ｜ シリーズA</span></div>
-          <h3>土木IT企業の管理会計基盤構築</h3>
-          <p class="bp-lead">事業拡大のスピードに経営管理体制が追いつかず、数値の把握そのものに時間を要していた土木IT企業に対し、管理会計基盤とKPIダッシュボードの構築を支援しました。</p>
-          <span class="bp-more">VIEW MORE<em>→</em></span>
-        </a>
-    </div>
-  </section>
-
-  <div class="section" style="padding-top:0;padding-bottom:clamp(3rem,6vw,5rem)">
-    <a class="back-link" href="./consulting.html#services">← BACK TO CONSULTING</a>
-  </div>
-
-  <section class="finale fin-dark" data-scene="dark" data-sphere="on">
-    <div class="fin-inner">
-      <p class="sec-label center">CONTACT</p>
-      <p class="fin-note">まだ整理しきれていない段階から、ご相談いただけます。</p>
-      <a class="fin-mail" href="./contact.html">GET IN TOUCH<em>→</em></a>
-    </div>
-  </section>
-
+<section class="page-hero">
+<p class="sec-label"><i>SERVICE</i>DIGITAL DESIGN &amp; IMPLEMENTATION</p>
+<h1 class="page-title" data-split="">デジタル：設計・実行</h1>
+<p class="sec-lede">経営数値が見えなければ、投資判断はスピードを失います。</p>
+</section>
+<section class="section" style="padding-top:0">
+<p class="sd-lead reveal-el">B supplyは、経営数値を「見える化」し、日々の意思決定に使える状態へと変えることを支援します。KPIダッシュボードの設計から管理会計基盤の実装、既存業務のデジタル化、そして現場に根づくツール導入まで、構想だけで終わらせず実装まで一貫して伴走します。私たち自身も自己勘定で事業を経営する当事者として、現場で使われる仕組みかどうかにこだわります。</p>
+</section>
+<section class="section">
+<div class="sec-head">
+<p class="sec-label"><i>01</i>SOLUTIONS ── ソリューション</p>
+</div>
+<div class="sd-sols">
+<div class="sd-sol reveal-el"><h3>KPIダッシュボード構築</h3><p>経営判断に必要な指標を定義し、日次・月次で追える形に可視化します。</p></div>
+<div class="sd-sol reveal-el"><h3>管理会計基盤の実装</h3><p>事業拡大に耐える管理会計の仕組みを設計し、経営数値を継続的に把握できる基盤を構築します。</p></div>
+<div class="sd-sol reveal-el"><h3>業務プロセスのデジタル化</h3><p>属人化した業務やリサーチ工数を仕組み化し、人が本来の業務に集中できる状態をつくります。</p></div>
+<div class="sd-sol reveal-el"><h3>ツール選定・導入・定着</h3><p>目的に合ったツールを選定し、導入だけでなく現場での定着まで支援します。</p></div>
+</div>
+</section>
+<section class="section">
+<div class="sec-head">
+<p class="sec-label"><i>02</i>APPROACH ── 私たちの支援の特徴</p>
+</div>
+<div class="sd-appr">
+<div class="sd-ap reveal-el"><h3>構想で終わらせない実行伴走</h3><p>設計図を描くだけでなく、ダッシュボードや基盤が実際に稼働する状態まで伴走します。</p></div>
+<div class="sd-ap reveal-el"><h3>経営の当事者としての視点</h3><p>自ら事業を経営する立場から、現場で本当に使われる仕組みかどうかを基準に設計します。</p></div>
+<div class="sd-ap reveal-el"><h3>属人化の解消を起点にした設計</h3><p>特定の担当者に依存していた業務やソーシングの工程を、仕組みとして再現可能な形に落とし込みます。</p></div>
+<div class="sd-ap reveal-el"><h3>戦略と実装の一貫支援</h3><p>経営管理の方針検討から具体的なツール導入・運用定着まで、切れ目なく支援します。</p></div>
+</div>
+</section>
+<section class="section">
+<div class="sec-head">
+<p class="sec-label"><i>03</i>BEST PRACTICE ── 関連事例</p>
+</div>
+<div class="bp-grid">
+<a class="bp-card" href="./case-02.html">
+<div class="case-tags"><span class="tag-theme">営業戦略</span><span class="tag-ind">M&amp;A仲介</span></div>
+<h3>M&amp;A仲介企業の営業戦略策定</h3>
+<p class="bp-lead">案件ソーシングの属人化とリサーチ工数の圧迫により、成約活動に十分な時間を割けないM&amp;A仲介企業を支援しました。</p>
+<span class="bp-more">VIEW MORE<em>→</em></span>
+</a>
+<a class="bp-card" href="./case-05.html">
+<div class="case-tags"><span class="tag-theme">経営管理</span><span class="tag-ind">土木IT ｜ シリーズA</span></div>
+<h3>土木IT企業の管理会計基盤構築</h3>
+<p class="bp-lead">事業拡大のスピードに経営管理体制が追いつかず、数値の把握そのものに時間を要していた土木IT企業に対し、管理会計基盤とKPIダッシュボードの構築を支援しました。</p>
+<span class="bp-more">VIEW MORE<em>→</em></span>
+</a>
+</div>
+</section>
+<div class="section" style="padding-top:0;padding-bottom:clamp(3rem,6vw,5rem)">
+<a class="back-link" href="./consulting.html#services">← BACK TO CONSULTING</a>
+</div>
+<section class="finale fin-dark" data-scene="dark" data-sphere="on">
+<div class="fin-inner">
+<p class="sec-label center">CONTACT</p>
+<p class="fin-note">まだ整理しきれていない段階から、ご相談いただけます。</p>
+<a class="fin-mail" href="./contact.html">GET IN TOUCH<em>→</em></a>
+</div>
+</section>
 </main>
-
 <footer class="footer">
-  <span class="ft-brand"><img class="ft-mark" src="./assets/img/logo.png" alt="" />B supply</span>
-  <nav class="ft-nav">
-    <a href="./consulting.html">Consulting</a>
-    <a href="./manufacturing.html">Manufacturing</a>
-    <a href="./recruit.html">Recruit</a>
-    <a href="./company.html">Company</a>
-    <a href="./contact.html">Contact</a>
-  </nav>
-  <span class="ft-copy">© 2026 B SUPPLY INC.</span>
+<span class="ft-brand"><img alt="" class="ft-mark" src="./assets/img/logo.png"/>B supply</span>
+<nav class="ft-nav">
+<a href="./consulting.html">Consulting</a>
+<a href="./manufacturing.html">Manufacturing</a>
+<a href="./recruit.html">Recruit</a>
+<a href="./company.html">Company</a>
+<a href="./contact.html">Contact</a>
+</nav>
+<span class="ft-copy">© 2026 B SUPPLY INC.</span>
 </footer>
-
-<script src="./app.js?v=20260723" defer></script>
+<script defer="" src="./app.js?v=20260723"></script>
 </body>
 </html>

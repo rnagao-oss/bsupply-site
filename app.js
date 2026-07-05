@@ -154,7 +154,17 @@
     })();
   })();
 
-  /* ── モバイルメニュー ── */  /* ── モバイルメニュー ── */
+  /* ── 言語スイッチャー ── */
+  const langSw = document.getElementById('langSw');
+  if (langSw) {
+    langSw.querySelector('.lang-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSw.classList.toggle('open');
+    });
+    document.addEventListener('click', () => langSw.classList.remove('open'));
+  }
+
+  /* ── モバイルメニュー ── */
   const menuBtn = document.getElementById('menuBtn');
   if (menuBtn) {
     menuBtn.addEventListener('click', () => document.body.classList.toggle('menu-open'));
@@ -207,6 +217,7 @@
   })();
 
   /* ── 文字分割（data-split） ── */
+  const IS_JA = (document.documentElement.lang || 'ja').startsWith('ja');
   document.querySelectorAll('[data-split]').forEach((el) => {
     el.querySelectorAll(':scope > span.ht-line').length
       ? el.querySelectorAll(':scope > span.ht-line').forEach(splitNode)
@@ -226,6 +237,19 @@
       [...n.childNodes].forEach((c) => {
         if (c.nodeType === 3) {
           const frag = document.createDocumentFragment();
+          if (!IS_JA) {
+            /* 欧文・ハングル等: 単語単位で分割（単語内改行を防ぐ） */
+            c.textContent.split(/(\s+)/).forEach((w) => {
+              if (!w) return;
+              if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(' ')); return; }
+              const tok = document.createElement('span');
+              tok.className = 'tok';
+              addChars(tok, w);
+              frag.appendChild(tok);
+            });
+            n.replaceChild(frag, c);
+            return;
+          }
           /* 文節分割：読点・句点の直後でのみ改行を許す */
           const phrases = c.textContent.split(/(?<=[、。，！？!?])/);
           phrases.forEach((ph) => {
@@ -459,7 +483,7 @@
       gate.observe(wrap);
     });
     try {
-      const geoRes = await fetch('./assets/data/land-110m-geo.json');
+      const geoRes = await fetch((document.documentElement.getAttribute('data-root') || '.') + '/assets/data/land-110m-geo.json');
       land = await geoRes.json();
     } catch (e) { /* offline */ }
 
