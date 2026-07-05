@@ -171,8 +171,8 @@ img, video, svg { display: block; max-width: 100%; }
   position: absolute; z-index: 2;
   left: clamp(1.6rem, 5.5vw, 5.5rem); right: clamp(1.6rem, 5.5vw, 5.5rem); bottom: 2rem;
   display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
   letter-spacing: 0.06em;
   opacity: 0;
   animation: fade 1.2s var(--ease) 3s forwards;
@@ -212,7 +212,7 @@ img, video, svg { display: block; max-width: 100%; }
 .sec-label {
   display: flex; align-items: center; gap: 0.9rem;
   font-family: var(--en);
-  font-size: var(--fs-label);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
   font-weight: 600;
   letter-spacing: 0.28em;
   color: var(--ink);
@@ -221,7 +221,7 @@ img, video, svg { display: block; max-width: 100%; }
 .sec-label i {
   font-style: normal;
   font-weight: 500;
-  color: var(--gray-2);
+  color: var(--ink-70);
   letter-spacing: 0.1em;
 }
 .sec-label::after { content: ""; width: 3rem; height: 1px; background: var(--ink); }
@@ -1345,7 +1345,7 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 .rc-message .kinetic { color: rgba(255, 255, 255, 0.05); }
 .rc-message .sec-label { color: #fff; }
 .rc-message .sec-label::after { background: #fff; }
-.rc-message .sec-label i { color: rgba(255, 255, 255, 0.4); }
+.rc-message .sec-label i { color: rgba(255, 255, 255, 0.72); }
 .rc-slogan {
   position: relative; z-index: 1;
   font-weight: 900;
@@ -1397,10 +1397,10 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 }
 .data-label {
   font-family: var(--en);
-  font-size: 0.68rem;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
   font-weight: 600;
-  letter-spacing: 0.24em;
-  color: var(--gray-2);
+  letter-spacing: 0.18em;
+  color: var(--ink-70);
   margin-bottom: 1.2rem;
 }
 .data-big { display: flex; align-items: baseline; gap: 0.25rem; flex: 1; }
@@ -2108,8 +2108,8 @@ body.menu-open .brand-mark { filter: none; }
 
 /* 黒フィナーレ */
 .finale.fin-dark { background: #000; }
-.fin-dark .sec-label { color: rgba(255, 255, 255, 0.55); }
-.fin-dark .sec-label i { color: rgba(255, 255, 255, 0.4); }
+.fin-dark .sec-label { color: rgba(255, 255, 255, 0.88); }
+.fin-dark .sec-label i { color: rgba(255, 255, 255, 0.65); }
 .fin-dark .fin-note { color: rgba(255, 255, 255, 0.6); }
 .fin-dark .fin-mail { color: #fff; }
 .fin-dark .fin-mail::after { background: #fff; }
@@ -2275,7 +2275,7 @@ body.menu-open .brand-mark { filter: none; }
 .msg-sign2 .ms-sign { width: clamp(190px, 22vw, 250px); height: auto; }
 
 /* ラベル拡大版・小型ゴースト */
-.sec-label.lg { font-size: clamp(0.95rem, 1.5vw, 1.15rem); letter-spacing: 0.3em; }
+.sec-label.lg { letter-spacing: 0.3em; }
 .sec-label.lg::after { width: 4rem; }
 .sec-head.sp-top { margin-top: clamp(5rem, 10vw, 9rem); }
 .msg-sign2 .ms-photo { width: clamp(180px, 20vw, 240px); }
@@ -2359,9 +2359,10 @@ body.menu-open .brand-mark { filter: none; }
 
 /* ═══ モバイル微調整 ═══ */
 @media (max-width: 620px) {
-  .sec-label { font-size: 0.64rem; letter-spacing: 0.14em; gap: 0.6rem; }
+  .sec-label { font-size: 0.95rem; letter-spacing: 0.14em; gap: 0.6rem; }
   .sec-label::after { width: 1.6rem; flex-shrink: 0; }
   .sec-label i { flex-shrink: 0; }
+  .data-label { font-size: 0.95rem; }
   .page-hero { padding-top: clamp(7.5rem, 30vw, 9rem); }
   .orbit { width: 108%; margin-left: -4%; max-width: none; }
 }
