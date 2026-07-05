@@ -59,14 +59,19 @@
     size();
     addEventListener('resize', size);
 
-    const N = 900;
+    const N = 2600;
     const GA = Math.PI * (3 - Math.sqrt(5));
     const pts = [];
     for (let i = 0; i < N; i++) {
       const y = 1 - (i / (N - 1)) * 2;
       const rad = Math.sqrt(1 - y * y);
       const th = GA * i;
-      pts.push({ x: Math.cos(th) * rad, y, z: Math.sin(th) * rad, tw: (i % 23) / 23 * Math.PI * 2 });
+      pts.push({
+        x: Math.cos(th) * rad, y, z: Math.sin(th) * rad,
+        tw: (i % 23) / 23 * Math.PI * 2,
+        ph: (i % 97) / 97 * Math.PI * 2,
+        big: i % 9 === 0,
+      });
     }
 
     let mx = 0, my = 0, tmx = 0, tmy = 0;
@@ -108,23 +113,27 @@
       const dark = centerCovered(darkEls);
       const col = dark ? '245,245,242' : '15,15,14';
       const maxA = dark ? 0.62 : 0.42;
-      const ry = t * 0.1 + prog * Math.PI * 1.3 + mx;
-      const rx = 0.35 + my + prog * 0.4;
+      const ry = t * 0.16 + prog * Math.PI * 1.3 + mx;
+      const rx = 0.35 + my + prog * 0.4 + Math.sin(t * 0.21) * 0.05;
       const cy = Math.cos(ry), sy = Math.sin(ry);
       const cx = Math.cos(rx), sx = Math.sin(rx);
       for (const p of pts) {
-        let x = p.x * cy + p.z * sy;
-        let z = -p.x * sy + p.z * cy;
-        let y = p.y * cx - z * sx;
-        z = p.y * sx + z * cx;
+        /* 有機的な呼吸: 半径がゆっくり脈動し、表面が生きて見える */
+        const br = 1 + Math.sin(t * 0.8 + p.ph) * 0.022;
+        const bx = p.x * br, by = p.y * br, bz = p.z * br;
+        let x = bx * cy + bz * sy;
+        let z = -bx * sy + bz * cy;
+        const y = by * cx - z * sx;
+        z = by * sx + z * cx;
         const sc = F / (F - z);
         const sxp = CX + x * R * sc;
         const syp = CY + y * R * sc;
         const depth = (z + 1) / 2;
-        const tw = 0.75 + 0.25 * Math.sin(t * 1.6 + p.tw);
-        const alpha = (0.05 + depth * maxA) * tw * vis;
+        const d2 = depth * depth;
+        const tw = 0.7 + 0.3 * Math.sin(t * 1.9 + p.tw);
+        const alpha = (0.03 + d2 * maxA) * tw * vis * (p.big ? 1.35 : 1);
         ctx.beginPath();
-        ctx.arc(sxp, syp, 0.7 + depth * 1.5, 0, Math.PI * 2);
+        ctx.arc(sxp, syp, (p.big ? 0.9 : 0.45) + d2 * (p.big ? 1.6 : 0.9), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${col},${alpha})`;
         ctx.fill();
       }

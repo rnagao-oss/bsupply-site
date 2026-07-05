@@ -128,7 +128,7 @@ img, video, svg { display: block; max-width: 100%; }
 @media (max-width: 960px) { .site-header nav a:not(.nav-cta) { display: none; } }
 
 /* ═══ HERO ═══ */
-.hero { position: relative; height: 100vh; min-height: 620px; overflow: hidden; background: #0a0a0a; }
+.hero { position: relative; height: 100vh; min-height: 620px; overflow: hidden; background: #000; }
 .hero-dots { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-inner {
   position: relative; z-index: 2;
@@ -1336,7 +1336,7 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 
 /* ═══ RECRUIT：トップメッセージ ═══ */
 .rc-message {
-  background: #0c0c0b;
+  background: #000;
   color: #fff;
   padding: clamp(5rem, 10vw, 9rem) clamp(1.6rem, 5.5vw, 5.5rem);
   position: relative;
@@ -1514,7 +1514,7 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
   position: fixed; inset: 0;
   width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 4;
+  z-index: 0;
 }
 
 /* ═══ モバイルメニュー ═══ */
@@ -2107,7 +2107,7 @@ body.menu-open .brand-mark { filter: none; }
 @media (max-width: 640px) { .ot-list li { flex-direction: column; gap: 0.25rem; } }
 
 /* 黒フィナーレ */
-.finale.fin-dark { background: var(--ink); }
+.finale.fin-dark { background: #000; }
 .fin-dark .sec-label { color: rgba(255, 255, 255, 0.55); }
 .fin-dark .sec-label i { color: rgba(255, 255, 255, 0.4); }
 .fin-dark .fin-note { color: rgba(255, 255, 255, 0.6); }
@@ -2320,7 +2320,7 @@ body.menu-open .brand-mark { filter: none; }
 @property --sweep { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 .loader { background: none; transition: none; }
 .loader.done { transform: none; visibility: visible; }
-.ld-panel { position: absolute; inset: -1px; background: #0a0a09; transition: transform 0.7s cubic-bezier(0.8, 0, 0.2, 1); }
+.ld-panel { position: absolute; inset: -1px; background: #000; transition: transform 0.7s cubic-bezier(0.8, 0, 0.2, 1); }
 .ld-p1 { clip-path: polygon(0 0, 100% 0, 0 100%); }
 .ld-p2 { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
 .loader.flip .ld-panel { background: #fff; }
