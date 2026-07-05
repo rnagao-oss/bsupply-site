@@ -688,5 +688,36 @@
   }, { threshold: 0.6 });
   document.querySelectorAll('.is-num').forEach((el) => issueIO.observe(el));
 
+  /* ── お問い合わせ: AJAX送信→自前サンクスページへ直行（FormSubmitの画面を経由しない） ── */
+  const ctForm = document.querySelector('.ct-form');
+  if (ctForm) {
+    ctForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = ctForm.querySelector('.ct-submit');
+      if (btn.dataset.busy) return;
+      btn.dataset.busy = '1';
+      const orig = btn.innerHTML;
+      btn.innerHTML = document.documentElement.lang === 'ja' ? '送信中…' : 'Sending…';
+      const fd = new FormData(ctForm);
+      const att = fd.get('attachment');
+      if (att && att.size === 0) fd.delete('attachment');
+      const dest = ctForm.querySelector('input[name="_next"]')?.value || './thanks.html';
+      fetch(ctForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        method: 'POST', body: fd, headers: { Accept: 'application/json' },
+      })
+        .then((r) => r.json())
+        .then((j) => {
+          if (j.success === 'true' || j.success === true) { location.href = dest; return; }
+          throw new Error('formsubmit');
+        })
+        .catch(() => {
+          /* 失敗時は通常POSTにフォールバック（メールは届く）。submit()はこのリスナーを再発火しない */
+          delete btn.dataset.busy;
+          btn.innerHTML = orig;
+          ctForm.submit();
+        });
+    });
+  }
+
   onScroll();
 })();
