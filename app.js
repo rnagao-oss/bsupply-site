@@ -46,20 +46,22 @@
     document.body.appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
-    let W = 0, H = 0, R = 0, CX = 0, CY = 0;
+    let W = 0, H = 0, R = 0, CX = 0, CY = 0, DS = 1;
     function size() {
       W = innerWidth; H = innerHeight;
       canvas.width = W * devicePixelRatio;
       canvas.height = H * devicePixelRatio;
       ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-      R = Math.min(W, H) * (W > 900 ? 0.37 : 0.31);
+      R = Math.min(W, H) * (W > 900 ? 0.37 : 0.34);
       CX = W > 900 ? W * 0.74 : W * 0.5;
       CY = H * 0.52;
+      /* PCと同じ「微細な星屑」の質感: 球が小さい画面ほど点も細かく */
+      DS = W > 900 ? 1 : 0.78;
     }
     size();
     addEventListener('resize', size);
 
-    const N = innerWidth > 900 ? 4400 : 2800;
+    const N = 4400;
     const GA = Math.PI * (3 - Math.sqrt(5));
     const pts = [];
     for (let i = 0; i < N; i++) {
@@ -112,8 +114,7 @@
       prog += (tProg - prog) * 0.07;
       const dark = centerCovered(darkEls);
       const col = dark ? '245,245,242' : '15,15,14';
-      const mobileDim = W <= 700 ? 0.38 : 1;  /* モバイルは文字可読性優先で気配レベル */
-      const maxA = (dark ? 0.72 : 0.58) * mobileDim;
+      const maxA = dark ? 0.72 : 0.58;
       const ry = t * 0.16 + prog * Math.PI * 1.3 + mx;
       const rx = 0.35 + my + prog * 0.4 + Math.sin(t * 0.21) * 0.05;
       const cy = Math.cos(ry), sy = Math.sin(ry);
@@ -134,7 +135,7 @@
         const tw = 0.86 + 0.14 * Math.sin(t * 1.4 + p.tw);
         const alpha = (0.05 + d2 * maxA) * tw * vis * (p.big ? 1.3 : 1);
         ctx.beginPath();
-        ctx.arc(sxp, syp, (p.big ? 0.85 : 0.45) + d2 * (p.big ? 1.2 : 0.65), 0, Math.PI * 2);
+        ctx.arc(sxp, syp, ((p.big ? 0.85 : 0.45) + d2 * (p.big ? 1.2 : 0.65)) * DS, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${col},${alpha})`;
         ctx.fill();
       }
