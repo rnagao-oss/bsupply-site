@@ -2359,9 +2359,10 @@ body.menu-open .brand-mark { filter: none; }
 
 /* ═══ モバイル微調整 ═══ */
 @media (max-width: 620px) {
-  .sec-label { font-size: 0.95rem; letter-spacing: 0.14em; gap: 0.6rem; }
-  .sec-label::after { width: 1.6rem; flex-shrink: 0; }
+  .sec-label { font-size: 0.95rem; letter-spacing: 0.14em; gap: 0.6rem; word-break: keep-all; }
+  .sec-label::after { display: none; }
   .sec-label i { flex-shrink: 0; }
+  .sl-sep { display: none; }
   .data-label { font-size: 0.95rem; }
   .page-hero { padding-top: clamp(7.5rem, 30vw, 9rem); }
   .orbit { width: 108%; margin-left: -4%; max-width: none; }
