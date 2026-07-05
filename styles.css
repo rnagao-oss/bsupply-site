@@ -2465,3 +2465,33 @@ body.menu-open .brand-mark { filter: none; }
 .th-back i { font-style: normal; transition: transform 0.35s var(--ease); }
 .th-back:hover { background: #fff; color: var(--ink); }
 .th-back:hover i { transform: translateX(4px); }
+
+/* 添付ファイル欄 */
+.ct-file input[type="file"] {
+  display: block; width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px dashed var(--gray-2);
+  background: #fff;
+  font-size: 0.92rem;
+  color: var(--ink-70);
+  cursor: pointer;
+}
+.ct-file input[type="file"]:hover { border-color: var(--ink); }
+.ct-file input[type="file"]::file-selector-button {
+  font-family: var(--jp);
+  font-size: 0.85rem;
+  padding: 0.45rem 1.1rem;
+  margin-right: 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+.ct-file input[type="file"]::file-selector-button:hover { background: var(--ink); color: #fff; }
+.ct-file small {
+  display: block; margin-top: 0.55rem;
+  font-size: 0.8rem; color: var(--gray);
+  letter-spacing: 0.04em;
+}
