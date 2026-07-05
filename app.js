@@ -3,10 +3,16 @@
   const ease = (t) => 1 - Math.pow(1 - t, 3);
 
   /* ── LOADING：% カウンター（トップのみ） ── */
-  const loader = document.getElementById('loader');
+  let loader = document.getElementById('loader');
+  if (loader && sessionStorage.getItem('bsLoaded')) {
+    loader.remove();
+    loader = null;
+    setTimeout(revealHeroTitle, 150);
+  }
   if (loader) {
+    try { sessionStorage.setItem('bsLoaded', '1'); } catch (e) {}
     const ldNum = document.getElementById('ldNum');
-    const LOAD_DUR = 1600;
+    const LOAD_DUR = 900;
     const t0 = performance.now();
     (function ldTick(now) {
       const p = Math.min((now - t0) / LOAD_DUR, 1);
@@ -446,13 +452,15 @@
     sizeAll();
 
     let land = null;
+    await new Promise((resolve) => {
+      const gate = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) { gate.disconnect(); resolve(); }
+      }, { rootMargin: '600px 0px' });
+      gate.observe(wrap);
+    });
     try {
-      const [topoRes, tc] = await Promise.all([
-        fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json'),
-        import('https://cdn.jsdelivr.net/npm/topojson-client@3/+esm'),
-      ]);
-      const topo = await topoRes.json();
-      land = tc.feature(topo, topo.objects.land);
+      const geoRes = await fetch('./assets/data/land-110m-geo.json');
+      land = await geoRes.json();
     } catch (e) { /* offline */ }
 
     function drawLand() {
