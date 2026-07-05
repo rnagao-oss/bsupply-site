@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>オペレーション ｜ 株式会社B supply</title>
+<meta name="description" content="経営管理体制の構築・KPI設計・経営企画代行・業務改善。B supplyが経営数値の可視化から意思決定の高速化までを実行支援します。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="./assets/img/logo.png" />
+<link rel="stylesheet" href="./styles.css?v=20260720" />
+</head>
+<body class="subpage">
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+<canvas class="ambient-dots" id="ambientDots" aria-hidden="true"></canvas>
+
+<header class="site-header light" id="siteHeader">
+  <a class="brand" href="./index.html"><img class="brand-mark" src="./assets/img/logo.png" alt="" />B supply</a>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./consulting.html">Consulting</a>
+    <a href="./manufacturing.html">Manufacturing</a>
+    <a href="./recruit.html">Recruit</a>
+    <a href="./company.html">Company</a>
+    <a href="./contact.html" class="nav-cta">Contact</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="メニュー"><i></i><i></i></button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav>
+    <a href="./index.html">Home<em>ホーム</em></a>
+    <a href="./consulting.html">Consulting<em>コンサルティング</em></a>
+    <a href="./manufacturing.html">Manufacturing<em>革製造事業</em></a>
+    <a href="./recruit.html">Recruit<em>採用情報</em></a>
+    <a href="./company.html">Company<em>会社概要</em></a>
+    <a href="./contact.html">Contact<em>お問い合わせ</em></a>
+  </nav>
+</div>
+
+<main>
+  <section class="page-hero">
+    <p class="sec-label"><i>SERVICE</i>OPERATION</p>
+    <h1 class="page-title" data-split>オペレーション</h1>
+    <p class="sec-lede">経営の意思決定は、数字が整って初めて速くなります。</p>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <p class="sd-lead reveal-el">事業が拡大する局面ほど、経営数値の把握と意思決定の速度が成長の制約になります。B supplyは、管理会計基盤の構築からKPI設計、経営企画機能の代行、日々の業務改善まで、経営の「土台」を実行レベルで支援します。自己勘定で事業を経営する当事者として、机上の制度設計にとどまらず、実際に運用が回る形で仕組みを組み立てます。</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label"><i>01</i>SOLUTIONS ── ソリューション</p>
+    </div>
+    <div class="sd-sols">
+        <div class="sd-sol reveal-el"><h3>経営管理体制の構築</h3><p>経営数値が可視化される管理会計基盤を構築し、数値に基づく意思決定ができる状態を整えます。</p></div>
+        <div class="sd-sol reveal-el"><h3>KPI設計</h3><p>事業の実態に即したKPIを設計し、ダッシュボードとして経営判断に使える形に落とし込みます。</p></div>
+        <div class="sd-sol reveal-el"><h3>経営企画代行</h3><p>経営企画機能そのものを代行し、投資規律の策定や中期計画の立案を担います。</p></div>
+        <div class="sd-sol reveal-el"><h3>業務改善</h3><p>資金繰りやガバナンスを含む経営基盤の再構築を通じて、事業運営そのものを改善します。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label"><i>02</i>APPROACH ── 私たちの支援の特徴</p>
+    </div>
+    <div class="sd-appr">
+        <div class="sd-ap reveal-el"><h3>実行まで伴走する</h3><p>制度設計だけで終わらせず、ダッシュボード構築や運用定着まで実行を伴走します。</p></div>
+        <div class="sd-ap reveal-el"><h3>経営の当事者としての視点</h3><p>自己勘定で事業を経営する立場から、実際に機能する管理体制を設計します。</p></div>
+        <div class="sd-ap reveal-el"><h3>戦略と管理会計を接続する</h3><p>KPIや管理会計を、投資判断や中期経営計画といった経営の意思決定と一体で設計します。</p></div>
+        <div class="sd-ap reveal-el"><h3>経営企画機能そのものを担う</h3><p>体制構築にとどまらず、経営企画の役割を代行し継続的な運用を支えます。</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-head">
+      <p class="sec-label"><i>03</i>BEST PRACTICE ── 関連事例</p>
+    </div>
+    <div class="bp-grid">
+        <a class="bp-card" href="./case-05.html">
+          <div class="case-tags"><span class="tag-theme">経営管理</span><span class="tag-ind">土木IT ｜ シリーズA</span></div>
+          <h3>土木IT企業の管理会計基盤構築</h3>
+          <p class="bp-lead">事業拡大のスピードに経営管理体制が追いつかず、数値の把握そのものに時間を要していた土木IT企業に対し、管理会計基盤とKPIダッシュボードの構築を支援しました。</p>
+          <span class="bp-more">VIEW MORE<em>→</em></span>
+        </a>
+        <a class="bp-card" href="./case-08.html">
+          <div class="case-tags"><span class="tag-theme">経営管理</span><span class="tag-ind">マッチングアプリ</span></div>
+          <h3>マッチングアプリ企業の事業戦略</h3>
+          <p class="bp-lead">独資で運営するマッチングアプリ企業に対し、KPI分析と投資規律の策定を起点に、PLハンドリングから中期経営計画の策定までを一貫して支援しました。</p>
+          <span class="bp-more">VIEW MORE<em>→</em></span>
+        </a>
+        <a class="bp-card" href="./case-09.html">
+          <div class="case-tags"><span class="tag-theme">事業再生</span><span class="tag-ind">物流 ｜ シード</span></div>
+          <h3>物流会社の事業再生戦略</h3>
+          <p class="bp-lead">資金繰りの逼迫と収益構造の悪化が同時進行するなか、B supplyは事業モデルの再設計から資金調達の実行まで一貫して伴走しました。</p>
+          <span class="bp-more">VIEW MORE<em>→</em></span>
+        </a>
+    </div>
+  </section>
+
+  <div class="section" style="padding-top:0;padding-bottom:clamp(3rem,6vw,5rem)">
+    <a class="back-link" href="./consulting.html#services">← BACK TO CONSULTING</a>
+  </div>
+
+  <section class="finale fin-dark" data-scene="dark" data-sphere="on">
+    <div class="fin-inner">
+      <p class="sec-label center">CONTACT</p>
+      <p class="fin-note">まだ整理しきれていない段階から、ご相談いただけます。</p>
+      <a class="fin-mail" href="./contact.html">GET IN TOUCH<em>→</em></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span class="ft-brand"><img class="ft-mark" src="./assets/img/logo.png" alt="" />B supply</span>
+  <nav class="ft-nav">
+    <a href="./consulting.html">Consulting</a>
+    <a href="./manufacturing.html">Manufacturing</a>
+    <a href="./recruit.html">Recruit</a>
+    <a href="./company.html">Company</a>
+    <a href="./contact.html">Contact</a>
+  </nav>
+  <span class="ft-copy">© 2026 B SUPPLY INC.</span>
+</footer>
+
+<script src="./app.js?v=20260720" defer></script>
+</body>
+</html>

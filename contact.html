@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お問い合わせ ｜ 株式会社B supply</title>
+<meta name="description" content="B supplyへのお問い合わせ。コンサルティング事業・革製造事業・その他のご相談を受け付けています。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="./assets/img/logo.png" />
+<link rel="stylesheet" href="./styles.css?v=20260722" />
+</head>
+<body class="subpage" data-sphere-color="176,70,38">
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+<canvas class="ambient-dots" id="ambientDots" aria-hidden="true"></canvas>
+
+<header class="site-header light" id="siteHeader">
+  <a class="brand" href="./index.html"><img class="brand-mark" src="./assets/img/logo.png" alt="" />B supply</a>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./consulting.html">Consulting</a>
+    <a href="./manufacturing.html">Manufacturing</a>
+    <a href="./recruit.html">Recruit</a>
+    <a href="./company.html">Company</a>
+    <a href="./contact.html" class="nav-cta">Contact</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="メニュー"><i></i><i></i></button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav>
+    <a href="./index.html">Home<em>ホーム</em></a>
+    <a href="./consulting.html">Consulting<em>コンサルティング</em></a>
+    <a href="./manufacturing.html">Manufacturing<em>革製造事業</em></a>
+    <a href="./recruit.html">Recruit<em>採用情報</em></a>
+    <a href="./company.html">Company<em>会社概要</em></a>
+    <a href="./contact.html">Contact<em>お問い合わせ</em></a>
+  </nav>
+</div>
+
+<main>
+  <section class="page-hero" data-sphere="on">
+    <p class="sec-label"><i>GET IN TOUCH</i>CONTACT</p>
+    <h1 class="page-title" data-split>お問い合わせ</h1>
+    <p class="sec-lede">内容を確認のうえ、担当者よりご連絡いたします。</p>
+  </section>
+
+  <section class="section ct-section" data-sphere="on">
+    <form class="ct-form" action="https://formsubmit.co/r.nagao@b--supply.com" method="POST">
+      <input type="hidden" name="_subject" value="【B supplyサイト】お問い合わせ" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" style="display:none" />
+
+      <fieldset class="ct-field">
+        <legend>お問い合わせの種別 <em>必須</em></legend>
+        <div class="ct-radios">
+          <label class="ct-radio">
+            <input type="radio" name="お問い合わせ種別" value="コンサルティング事業" required />
+            <span><b>コンサルティング事業</b><small>経営のご相談・プロジェクトのご依頼</small></span>
+          </label>
+          <label class="ct-radio">
+            <input type="radio" name="お問い合わせ種別" value="革製造事業" />
+            <span><b>革製造事業</b><small>OEMのご相談・サンプル製作・工房見学</small></span>
+          </label>
+          <label class="ct-radio">
+            <input type="radio" name="お問い合わせ種別" value="その他" />
+            <span><b>その他</b><small>採用・事業承継・取材など</small></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="ct-grid">
+        <label class="ct-field">
+          <span>会社名</span>
+          <input type="text" name="会社名" placeholder="株式会社〇〇" />
+        </label>
+        <label class="ct-field">
+          <span>お名前 <em>必須</em></span>
+          <input type="text" name="お名前" placeholder="山田 太郎" required />
+        </label>
+        <label class="ct-field">
+          <span>メールアドレス <em>必須</em></span>
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <label class="ct-field">
+          <span>電話番号</span>
+          <input type="tel" name="電話番号" placeholder="03-0000-0000" />
+        </label>
+      </div>
+
+      <label class="ct-field">
+        <span>お問い合わせ内容 <em>必須</em></span>
+        <textarea name="お問い合わせ内容" rows="7" placeholder="ご相談内容をご記入ください。" required></textarea>
+      </label>
+
+      <button class="ct-submit" type="submit">送信する<em>→</em></button>
+      <p class="ct-note">お預かりした情報は、お問い合わせへの対応にのみ使用します。</p>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <span class="ft-brand"><img class="ft-mark" src="./assets/img/logo.png" alt="" />B supply</span>
+  <nav class="ft-nav">
+    <a href="./consulting.html">Consulting</a>
+    <a href="./manufacturing.html">Manufacturing</a>
+    <a href="./recruit.html">Recruit</a>
+    <a href="./company.html">Company</a>
+    <a href="./contact.html">Contact</a>
+  </nav>
+  <span class="ft-copy">© 2026 B SUPPLY INC.</span>
+</footer>
+
+<script src="./app.js?v=20260722" defer></script>
+</body>
+</html>
