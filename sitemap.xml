@@ -369,6 +369,22 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://bsupply.jp/job-inspection-cutting.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/job-inspection-cutting.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/job-inspection-cutting.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/job-inspection-cutting.html"/>
+    <lastmod>2026-07-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bsupply.jp/en/job-inspection-cutting.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/job-inspection-cutting.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/job-inspection-cutting.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/job-inspection-cutting.html"/>
+    <lastmod>2026-07-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://bsupply.jp/job-investment-front.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/job-investment-front.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/job-investment-front.html"/>

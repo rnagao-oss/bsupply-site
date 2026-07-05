@@ -721,3 +721,71 @@
 
   onScroll();
 })();
+
+/* ── 求人フィルター（採用情報） ── */
+(() => {
+  const bar = document.querySelector('.jb-filter');
+  if (!bar) return;
+  const rows = [...document.querySelectorAll('.jb-row')];
+  const menus = [...bar.querySelectorAll('.jb-menu')];
+  const pills = [...bar.querySelectorAll('.jb-pill')];
+  const countEl = bar.querySelector('.jb-count b');
+  const clearBtn = bar.querySelector('.jb-clear');
+  const state = { div: new Set(), loc: new Set() };
+
+  const closeMenus = () => {
+    menus.forEach((m) => m.classList.remove('open'));
+    pills.forEach((p) => p.classList.remove('on'));
+  };
+  pills.forEach((p) => {
+    p.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const menu = bar.querySelector(`.jb-menu[data-for="${p.dataset.menu}"]`);
+      const wasOpen = menu.classList.contains('open');
+      closeMenus();
+      if (!wasOpen) {
+        menu.style.left = Math.max(0, Math.min(p.offsetLeft, bar.clientWidth - menu.offsetWidth)) + 'px';
+        menu.classList.add('open');
+        p.classList.add('on');
+      }
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.jb-menu')) closeMenus();
+  });
+
+  const apply = () => {
+    let visible = 0;
+    rows.forEach((r) => {
+      const okDiv = !state.div.size || (r.dataset.div || '').split(' ').some((v) => state.div.has(v));
+      const okLoc = !state.loc.size || (r.dataset.loc || '').split(' ').some((v) => state.loc.has(v));
+      const ok = okDiv && okLoc;
+      r.classList.toggle('hide', !ok);
+      if (ok) visible++;
+    });
+    document.querySelectorAll('.rc-division').forEach((sec) => {
+      const any = [...sec.querySelectorAll('.jb-row')].some((r) => !r.classList.contains('hide'));
+      sec.classList.toggle('hide', !any);
+    });
+    if (countEl) countEl.textContent = visible;
+    pills.forEach((p) => p.setAttribute('data-n', state[p.dataset.menu].size));
+    if (clearBtn) clearBtn.style.visibility = state.div.size || state.loc.size ? 'visible' : 'hidden';
+  };
+  menus.forEach((m) => {
+    m.addEventListener('change', (e) => {
+      const key = m.dataset.for;
+      if (e.target.checked) state[key].add(e.target.value);
+      else state[key].delete(e.target.value);
+      apply();
+    });
+  });
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      state.div.clear();
+      state.loc.clear();
+      menus.forEach((m) => m.querySelectorAll('input').forEach((i) => (i.checked = false)));
+      apply();
+    });
+  }
+  apply();
+})();
