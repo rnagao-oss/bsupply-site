@@ -249,7 +249,7 @@ img, video, svg { display: block; max-width: 100%; }
   letter-spacing: -0.035em;
   line-height: 1;
   white-space: nowrap;
-  color: rgba(15, 15, 14, 0.045);
+  color: rgba(15, 15, 14, 0.06);
   pointer-events: none;
   will-change: transform;
   z-index: 0;
@@ -260,7 +260,7 @@ img, video, svg { display: block; max-width: 100%; }
 .kinetic b { font-weight: 800; padding-right: 0.55em; }
 @keyframes ghostFlow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes ghostFlowR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.kinetic.outline { color: rgba(15, 15, 14, 0.045); }
+.kinetic.outline { color: rgba(15, 15, 14, 0.06); }
 .statement { overflow: hidden; }
 .cv-block { position: relative; overflow: hidden; padding-top: clamp(8rem, 14vw, 12rem); }
 .cv-block .kinetic { top: 0; }
@@ -2380,3 +2380,26 @@ body.menu-open .brand-mark { filter: none; }
   .page-hero { padding-top: clamp(7.5rem, 30vw, 9rem); }
   .orbit { width: 108%; margin-left: -4%; max-width: none; }
 }
+
+
+/* オープニング強化 */
+.loader.flash .ld-panel { background: #fff; transition: none; }
+.ld-ghost {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--en);
+  font-weight: 800;
+  font-size: clamp(7rem, 22vw, 20rem);
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  transform: scale(1.45);
+  opacity: 0;
+  transition: transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+  pointer-events: none;
+}
+.loader.ghostin .ld-ghost { opacity: 1; transform: scale(1); }
+.loader.flip .ld-ghost { color: rgba(15, 15, 14, 0.05); }
+.loader.punch .ld-core { transform: scale(1.1); transition: transform 0.16s cubic-bezier(0.5, 0, 0.3, 1); }
+.loader.punch .ld-ghost { transform: scale(1.06); transition: transform 0.16s cubic-bezier(0.5, 0, 0.3, 1); }
+.loader.done .ld-ghost { opacity: 0; }

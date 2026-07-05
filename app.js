@@ -17,17 +17,23 @@
     });
     word.textContent = '';
     chars.forEach((c) => word.appendChild(c));
-    setTimeout(() => loader.classList.add('draw'), 60);      /* 円が描かれる */
+    setTimeout(() => loader.classList.add('flash'), 90);      /* 白の一閃 */
+    setTimeout(() => loader.classList.remove('flash'), 170);
+    setTimeout(() => loader.classList.add('draw'), 240);       /* 円が描かれる */
+    setTimeout(() => loader.classList.add('ghostin'), 760);    /* 巨大ゴースト降臨 */
     setTimeout(() => {
       loader.classList.add('word');                            /* B SUPPLY 打刻 */
-      chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 34));
-    }, 780);
-    setTimeout(() => loader.classList.add('flip'), 1460);      /* 白黒反転パンチ */
+      chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 36));
+    }, 1050);
+    setTimeout(() => loader.classList.add('punch'), 1950);     /* ズームパンチ */
+    setTimeout(() => loader.classList.add('flip'), 2120);      /* 反転ストロボ */
+    setTimeout(() => loader.classList.remove('flip'), 2230);
+    setTimeout(() => loader.classList.add('flip'), 2340);
     setTimeout(() => {
       loader.classList.add('done');                            /* 対角ワイプ */
       revealHeroTitle();
-    }, 1650);
-    setTimeout(() => loader.remove(), 2600);
+    }, 2520);
+    setTimeout(() => loader.remove(), 3500);
   } else {
     setTimeout(() => {
       const pt = document.querySelector('.page-title');
@@ -59,7 +65,7 @@
     size();
     addEventListener('resize', size);
 
-    const N = 3200;
+    const N = innerWidth > 900 ? 4400 : 2800;
     const GA = Math.PI * (3 - Math.sqrt(5));
     const pts = [];
     for (let i = 0; i < N; i++) {
@@ -112,7 +118,7 @@
       prog += (tProg - prog) * 0.07;
       const dark = centerCovered(darkEls);
       const col = dark ? '245,245,242' : '15,15,14';
-      const maxA = dark ? 0.62 : 0.42;
+      const maxA = dark ? 0.72 : 0.58;
       const ry = t * 0.16 + prog * Math.PI * 1.3 + mx;
       const rx = 0.35 + my + prog * 0.4 + Math.sin(t * 0.21) * 0.05;
       const cy = Math.cos(ry), sy = Math.sin(ry);
@@ -131,9 +137,9 @@
         const depth = (z + 1) / 2;
         const d2 = depth * depth;
         const tw = 0.86 + 0.14 * Math.sin(t * 1.4 + p.tw);
-        const alpha = (0.04 + d2 * maxA) * tw * vis * (p.big ? 1.25 : 1);
+        const alpha = (0.05 + d2 * maxA) * tw * vis * (p.big ? 1.3 : 1);
         ctx.beginPath();
-        ctx.arc(sxp, syp, (p.big ? 0.8 : 0.5) + d2 * (p.big ? 1.1 : 0.7), 0, Math.PI * 2);
+        ctx.arc(sxp, syp, (p.big ? 0.85 : 0.45) + d2 * (p.big ? 1.2 : 0.65), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${col},${alpha})`;
         ctx.fill();
       }
@@ -323,7 +329,7 @@
     const speed = parseFloat(k.dataset.speed || '0.5');
     const half = `<b>${text}</b>`.repeat(4);
     k.innerHTML = `<span style="display:flex">${half}</span><span style="display:flex" aria-hidden="true">${half}</span>`;
-    const PXPS = 42; /* 全ティッカー共通のピクセル速度 */
+    const PXPS = Math.max(11, innerWidth / 34); /* 画面幅比の共通速度（モバイルでも同じ体感） */
     const halfW = k.firstElementChild.offsetWidth || 2000;
     k.style.setProperty('--ghost-dur', `${Math.round(halfW / PXPS)}s`);
     if (speed < 0) k.classList.add('rev');
@@ -362,7 +368,13 @@
   });
 
   /* ── ロゴマーキー：シームレスループ用に複製 ── */
-  document.querySelectorAll('.logo-track, .cl-track, .tick-track').forEach((t) => { t.innerHTML += t.innerHTML; });
+  document.querySelectorAll('.logo-track, .cl-track, .tick-track').forEach((t) => {
+    t.innerHTML += t.innerHTML;
+    /* ロゴ帯・事例ティッカーもゴーストと同じ体感速度に統一 */
+    const PXPS2 = Math.max(11, innerWidth / 34);
+    const halfW2 = t.scrollWidth / 2 || 2000;
+    t.style.animationDuration = `${Math.round(halfW2 / PXPS2)}s`;
+  });
 
   /* ── サービス行装置（展開＋ウェイト呼吸） ── */
   document.querySelectorAll('.sv-item').forEach((item) => {
