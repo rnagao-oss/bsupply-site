@@ -2,29 +2,32 @@
 (() => {
   const ease = (t) => 1 - Math.pow(1 - t, 3);
 
-  /* ── LOADING：% カウンター（トップのみ） ── */
-  let loader = document.getElementById('loader');
-  if (loader && sessionStorage.getItem('bsLoaded')) {
+  /* ── LOADING：ブラシサークル→白黒反転→対角ワイプ（トップのみ） ── */
+  const loader = document.getElementById('loader');
+  if (loader && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     loader.remove();
-    loader = null;
     setTimeout(revealHeroTitle, 150);
-  }
-  if (loader) {
-    try { sessionStorage.setItem('bsLoaded', '1'); } catch (e) {}
-    const ldNum = document.getElementById('ldNum');
-    const LOAD_DUR = 900;
-    const t0 = performance.now();
-    (function ldTick(now) {
-      const p = Math.min((now - t0) / LOAD_DUR, 1);
-      ldNum.textContent = String(Math.round(ease(p) * 100)).padStart(3, '0');
-      if (p < 1) { requestAnimationFrame(ldTick); }
-      else {
-        setTimeout(() => {
-          loader.classList.add('done');
-          revealHeroTitle();
-        }, 250);
-      }
-    })(t0);
+  } else if (loader) {
+    const word = document.getElementById('ldWord');
+    const chars = [...word.textContent].map((ch) => {
+      const s = document.createElement('span');
+      s.className = 'ld-ch';
+      s.textContent = ch === ' ' ? '\u00A0' : ch;
+      return s;
+    });
+    word.textContent = '';
+    chars.forEach((c) => word.appendChild(c));
+    setTimeout(() => loader.classList.add('draw'), 60);      /* 円が描かれる */
+    setTimeout(() => {
+      loader.classList.add('word');                            /* B SUPPLY 打刻 */
+      chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 34));
+    }, 780);
+    setTimeout(() => loader.classList.add('flip'), 1460);      /* 白黒反転パンチ */
+    setTimeout(() => {
+      loader.classList.add('done');                            /* 対角ワイプ */
+      revealHeroTitle();
+    }, 1650);
+    setTimeout(() => loader.remove(), 2600);
   } else {
     setTimeout(() => {
       const pt = document.querySelector('.page-title');

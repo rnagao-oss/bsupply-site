@@ -2315,3 +2315,53 @@ body.menu-open .brand-mark { filter: none; }
 .mm-lang { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid rgba(255,255,255,0.2); }
 .mm-lang a { font-family: var(--en); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
 .mm-lang a.cur { color: #fff; text-decoration: underline; }
+
+/* ═══ オープニング（Go風: ブラシサークル→反転→対角ワイプ） ═══ */
+@property --sweep { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.loader { background: none; transition: none; }
+.loader.done { transform: none; visibility: visible; }
+.ld-panel { position: absolute; inset: -1px; background: #0a0a09; transition: transform 0.7s cubic-bezier(0.8, 0, 0.2, 1); }
+.ld-p1 { clip-path: polygon(0 0, 100% 0, 0 100%); }
+.ld-p2 { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.loader.flip .ld-panel { background: #fff; }
+.loader.done .ld-p1 { transform: translate(-24%, -104%); }
+.loader.done .ld-p2 { transform: translate(24%, 104%); }
+.ld-core {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  transition: opacity 0.35s ease, transform 0.55s var(--ease);
+}
+.loader.done .ld-core { opacity: 0; transform: scale(1.05); }
+.ld-mark-wrap { width: clamp(150px, 22vw, 240px); }
+.ld-mark {
+  width: 100%;
+  filter: invert(1);
+  opacity: 0;
+  -webkit-mask-image: conic-gradient(#000 var(--sweep), transparent 0);
+  mask-image: conic-gradient(#000 var(--sweep), transparent 0);
+  transform: scale(0.92) rotate(-8deg);
+}
+.loader.draw .ld-mark {
+  opacity: 1;
+  animation: ldSweep 0.72s cubic-bezier(0.6, 0, 0.3, 1) forwards, ldSettle 0.3s ease 0.72s forwards;
+}
+@keyframes ldSweep { from { --sweep: 0deg; } to { --sweep: 360deg; } }
+@keyframes ldSettle { from { transform: scale(0.92) rotate(-8deg); } to { transform: scale(1) rotate(0deg); } }
+.loader.flip .ld-mark { filter: none; }
+.ld-word {
+  display: flex;
+  font-family: var(--en);
+  font-weight: 700;
+  font-size: clamp(2rem, 5.6vw, 4.2rem);
+  letter-spacing: 0.14em;
+  color: #fff;
+  line-height: 1;
+  overflow: hidden;
+}
+.loader.flip .ld-word { color: #0f0f0e; }
+.ld-ch { display: inline-block; transform: translateY(118%); opacity: 0; transition: transform 0.42s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.2s; }
+.ld-ch.in { transform: translateY(0); opacity: 1; }
+.ld-line { width: 0; height: 2px; background: #fff; transition: width 0.5s var(--ease); }
+.loader.word .ld-line { width: clamp(120px, 16vw, 200px); }
+.loader.flip .ld-line { background: #0f0f0e; }

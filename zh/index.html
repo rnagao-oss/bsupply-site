@@ -10,7 +10,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700;900&amp;family=Zen+Kurenaido&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/img/logo.png" rel="icon" type="image/png"/>
-<link href="../styles.css?v=20260723" rel="stylesheet"/>
+<link href="../styles.css?v=20260724" rel="stylesheet"/>
 
 
 
@@ -26,10 +26,14 @@
 <link href="https://rnagao-oss.github.io/bsupply-site/index.html" hreflang="x-default" rel="alternate"/></head>
 <body data-sphere-color="15,15,14">
 
-<div class="loader" id="loader">
-<img alt="B supply" class="ld-logo" src="../assets/img/logo.png"/>
-<div class="ld-count"><span id="ldNum">000</span><em>%</em></div>
-<div class="ld-label">B SUPPLY INC.</div>
+<div aria-hidden="true" class="loader" id="loader">
+<div class="ld-panel ld-p1"></div>
+<div class="ld-panel ld-p2"></div>
+<div class="ld-core">
+<div class="ld-mark-wrap"><img alt="" class="ld-mark" src="../assets/img/logo.png"/></div>
+<div class="ld-word" id="ldWord">B SUPPLY</div>
+<div class="ld-line"></div>
+</div>
 </div>
 
 <div aria-hidden="true" class="progress"><i id="progressBar"></i></div>
@@ -43,7 +47,7 @@
 <a href="./recruit.html">Recruit</a>
 <a href="./company.html">Company</a>
 <a class="nav-cta" href="./contact.html">Contact</a>
-<div class="lang-sw" id="langSw"><button aria-label="Language" class="lang-btn" type="button">ZH</button><div class="lang-menu"><a href="../index.html">日本語</a><a href="../en/index.html">English</a><a href="../it/index.html">Italiano</a><a href="../fr/index.html">Français</a><a href="../ko/index.html">한국어</a><a class="cur" href="../zh/index.html">中文</a></div></div></nav>
+<div class="lang-sw" id="langSw"><button aria-label="Language" class="lang-btn" type="button">ZH</button><div class="lang-menu"><a href="../index.html">🇯🇵 日本語</a><a href="../en/index.html">🇺🇸 English</a><a href="../it/index.html">🇮🇹 Italiano</a><a href="../fr/index.html">🇫🇷 Français</a><a href="../ko/index.html">🇰🇷 한국어</a><a class="cur" href="../zh/index.html">🇨🇳 中文</a></div></div></nav>
 <button aria-label="菜单" class="menu-btn" id="menuBtn" type="button"><i></i><i></i></button>
 </header>
 <div class="mobile-menu" id="mobileMenu">
@@ -55,7 +59,7 @@
 <a href="./company.html">Company</a>
 <a href="./contact.html">Contact</a>
 </nav>
-<div class="mm-lang"><a href="../index.html">日本語</a><a href="../en/index.html">English</a><a href="../it/index.html">Italiano</a><a href="../fr/index.html">Français</a><a href="../ko/index.html">한국어</a><a class="cur" href="../zh/index.html">中文</a></div></div>
+<div class="mm-lang"><a href="../index.html">🇯🇵 日本語</a><a href="../en/index.html">🇺🇸 English</a><a href="../it/index.html">🇮🇹 Italiano</a><a href="../fr/index.html">🇫🇷 Français</a><a href="../ko/index.html">🇰🇷 한국어</a><a class="cur" href="../zh/index.html">🇨🇳 中文</a></div></div>
 <main id="top">
 
 <section class="hero" data-scene="dark" data-sphere="on" id="hero">
@@ -164,20 +168,20 @@
 <g class="orbit-node" data-target="consulting">
 <circle cx="320" cy="110" pathlength="100" r="92"></circle>
 <text class="node-en" x="320" y="104">Consulting</text>
-<text class="node-jp" x="320" y="130">作为参谋提供经营支持</text>
+
 </g>
 <g class="orbit-node" data-target="investment">
 <circle cx="147" cy="410" pathlength="100" r="92"></circle>
 <text class="node-en" x="147" y="404">Investment</text>
-<text class="node-jp" x="147" y="430">对中小企业的投资</text>
+
 </g>
 <g class="orbit-node" data-target="valueup">
 <circle cx="493" cy="410" pathlength="100" r="92"></circle>
 <text class="node-en" x="493" y="404">Value Up</text>
-<text class="node-jp" x="493" y="430">所承继事业的经营／重建</text>
+
 </g>
 <text class="orbit-center-en" x="320" y="318">B supply</text>
-<text class="orbit-center-jp" x="320" y="344">经营的智慧与执行力</text>
+
 </svg>
 </div>
 <div class="structure-notes">
@@ -266,6 +270,6 @@
 </nav>
 <span class="ft-copy">© 2026 B SUPPLY INC.</span>
 </footer>
-<script defer="" src="../app.js?v=20260723"></script>
+<script defer="" src="../app.js?v=20260724"></script>
 </body>
 </html>
