@@ -309,18 +309,27 @@
   const progressBar = document.getElementById('progressBar');
   const hero = document.getElementById('hero');
   /* ゴーストテキスト：ティッカー化（複製してループ） */
+  /* 画面幅比の共通速度（モバイルでも同じ体感）。フォント/画像の読み込みで
+     帯の幅が後から変わっても、ResizeObserverで常に同じ速度に補正する */
+  const PXPS = () => Math.max(11, innerWidth / 34);
+  const keepSpeed = (el, apply) => {
+    const sync = () => {
+      const halfW = el.scrollWidth / 2;
+      if (halfW > 0) apply(Math.max(1, halfW / PXPS()));
+    };
+    sync();
+    new ResizeObserver(sync).observe(el);
+  };
   document.querySelectorAll('.kinetic').forEach((k) => {
     const text = k.textContent.trim();
     const speed = parseFloat(k.dataset.speed || '0.5');
-    const PXPS = Math.max(11, innerWidth / 34); /* 画面幅比の共通速度（モバイルでも同じ体感） */
     k.innerHTML = `<span style="display:flex"><b>${text}</b></span>`;
     const oneW = k.firstElementChild.offsetWidth || 2000;
     /* 巨大レイヤーはiOS Safariの合成限界でカクつくため、複製は画面1.5枚分を満たす最小回数に抑える */
     const reps = Math.max(1, Math.ceil((innerWidth * 1.5) / oneW));
     const half = `<b>${text}</b>`.repeat(reps);
     k.innerHTML = `<span style="display:flex">${half}</span><span style="display:flex" aria-hidden="true">${half}</span>`;
-    const halfW = k.firstElementChild.offsetWidth || oneW * reps;
-    k.style.setProperty('--ghost-dur', `${Math.max(1, Math.round(halfW / PXPS))}s`);
+    keepSpeed(k, (dur) => k.style.setProperty('--ghost-dur', `${dur.toFixed(1)}s`));
     if (speed < 0) k.classList.add('rev');
   });
 
@@ -359,10 +368,8 @@
   /* ── ロゴマーキー：シームレスループ用に複製 ── */
   document.querySelectorAll('.logo-track, .cl-track, .tick-track').forEach((t) => {
     t.innerHTML += t.innerHTML;
-    /* ロゴ帯・事例ティッカーもゴーストと同じ体感速度に統一 */
-    const PXPS2 = Math.max(11, innerWidth / 34);
-    const halfW2 = t.scrollWidth / 2 || 2000;
-    t.style.animationDuration = `${Math.round(halfW2 / PXPS2)}s`;
+    /* ロゴ帯・事例ティッカーもゴーストと同じ体感速度に統一（画像読込後の幅変化にも追従） */
+    keepSpeed(t, (dur) => { t.style.animationDuration = `${dur.toFixed(1)}s`; });
   });
 
   /* ── サービス行装置（展開＋ウェイト呼吸） ── */
