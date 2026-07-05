@@ -2403,3 +2403,12 @@ body.menu-open .brand-mark { filter: none; }
 .loader.punch .ld-core { transform: scale(1.1); transition: transform 0.16s cubic-bezier(0.5, 0, 0.3, 1); }
 .loader.punch .ld-ghost { transform: scale(1.06); transition: transform 0.16s cubic-bezier(0.5, 0, 0.3, 1); }
 .loader.done .ld-ghost { opacity: 0; }
+
+/* 円環図: 滑らかな周回（CSS回転） */
+.orbit-rot {
+  transform-box: view-box;
+  transform-origin: 320px 310px;
+  animation: orbitSpin 26s linear infinite;
+  will-change: transform;
+}
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
