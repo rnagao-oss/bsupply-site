@@ -2279,3 +2279,5 @@ body.menu-open .brand-mark { filter: none; }
 .sec-label.lg::after { width: 4rem; }
 .kinetic.sm { font-size: clamp(2.6rem, 6.5vw, 5.5rem); }
 .sec-head.sp-top { margin-top: clamp(5rem, 10vw, 9rem); }
+.kinetic.md { font-size: clamp(3.2rem, 8vw, 7rem); }
+.msg-sign2 .ms-photo { width: clamp(180px, 20vw, 240px); }
