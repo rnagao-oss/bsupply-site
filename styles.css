@@ -429,7 +429,7 @@ img, video, svg { display: block; max-width: 100%; }
 .orbit-node:hover .node-en, .orbit-node:hover .node-jp { fill: #fff; }
 .node-en {
   font-family: var(--en);
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 600;
   fill: var(--ink);
   text-anchor: middle;
@@ -437,9 +437,9 @@ img, video, svg { display: block; max-width: 100%; }
 }
 .node-jp {
   font-family: var(--jp);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  fill: var(--gray);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  fill: var(--ink-70);
   text-anchor: middle;
   transition: fill 0.5s var(--ease);
 }
@@ -452,9 +452,9 @@ img, video, svg { display: block; max-width: 100%; }
 }
 .orbit-center-jp {
   font-family: var(--jp);
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  fill: var(--gray);
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  fill: var(--ink-70);
   text-anchor: middle;
 }
 .structure-notes {
@@ -2312,9 +2312,14 @@ body.menu-open .brand-mark { filter: none; }
 .lang-menu a:hover { background: var(--bg-soft); color: var(--ink); }
 .lang-menu a.cur { color: var(--ink); font-weight: 700; }
 @media (max-width: 860px) { .lang-sw { display: none; } }
-.mm-lang { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-top: 2rem; padding-top: 1.4rem; border-top: 1px solid rgba(255,255,255,0.2); }
-.mm-lang a { font-family: var(--en); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); }
-.mm-lang a.cur { color: #fff; text-decoration: underline; }
+.mm-lang {
+  position: absolute; left: clamp(1.6rem, 8vw, 4rem); right: clamp(1.6rem, 8vw, 4rem); bottom: clamp(1.6rem, 6vw, 3rem);
+  display: flex; flex-wrap: wrap; gap: 0.7rem 1.3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.mm-lang a { font-size: 0.88rem; font-weight: 600; letter-spacing: 0.04em; color: var(--gray); }
+.mm-lang a.cur { color: var(--ink); font-weight: 700; }
 
 /* ═══ オープニング（Go風: ブラシサークル→反転→対角ワイプ） ═══ */
 @property --sweep { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
@@ -2365,3 +2370,13 @@ body.menu-open .brand-mark { filter: none; }
 .ld-line { width: 0; height: 2px; background: #fff; transition: width 0.5s var(--ease); }
 .loader.word .ld-line { width: clamp(120px, 16vw, 200px); }
 .loader.flip .ld-line { background: #0f0f0e; }
+
+
+/* ═══ モバイル微調整 ═══ */
+@media (max-width: 620px) {
+  .sec-label { font-size: 0.64rem; letter-spacing: 0.14em; gap: 0.6rem; }
+  .sec-label::after { width: 1.6rem; flex-shrink: 0; }
+  .sec-label i { flex-shrink: 0; }
+  .page-hero { padding-top: clamp(7.5rem, 30vw, 9rem); }
+  .orbit { width: 108%; margin-left: -4%; max-width: none; }
+}

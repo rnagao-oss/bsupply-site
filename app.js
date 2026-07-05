@@ -59,7 +59,7 @@
     size();
     addEventListener('resize', size);
 
-    const N = 2600;
+    const N = 3200;
     const GA = Math.PI * (3 - Math.sqrt(5));
     const pts = [];
     for (let i = 0; i < N; i++) {
@@ -130,10 +130,10 @@
         const syp = CY + y * R * sc;
         const depth = (z + 1) / 2;
         const d2 = depth * depth;
-        const tw = 0.7 + 0.3 * Math.sin(t * 1.9 + p.tw);
-        const alpha = (0.03 + d2 * maxA) * tw * vis * (p.big ? 1.35 : 1);
+        const tw = 0.86 + 0.14 * Math.sin(t * 1.4 + p.tw);
+        const alpha = (0.04 + d2 * maxA) * tw * vis * (p.big ? 1.25 : 1);
         ctx.beginPath();
-        ctx.arc(sxp, syp, (p.big ? 0.9 : 0.45) + d2 * (p.big ? 1.6 : 0.9), 0, Math.PI * 2);
+        ctx.arc(sxp, syp, (p.big ? 0.8 : 0.5) + d2 * (p.big ? 1.1 : 0.7), 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${col},${alpha})`;
         ctx.fill();
       }
@@ -567,7 +567,10 @@
         svg.appendChild(oPulse);
       });
       const oLabel = document.createElementNS(NS, 'text');
-      oLabel.setAttribute('x', ox + 14); oLabel.setAttribute('y', oy - 12);
+      const labelRight = ox + 14 + 58 > W;  /* 右端で切れる場合は左側に */
+      oLabel.setAttribute('x', labelRight ? ox - 14 : ox + 14);
+      oLabel.setAttribute('y', oy - 12);
+      if (labelRight) oLabel.setAttribute('text-anchor', 'end');
       oLabel.setAttribute('class', 'wm-label wm-origin-label on');
       oLabel.textContent = 'JAPAN';
       svg.appendChild(oLabel);
