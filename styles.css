@@ -106,7 +106,9 @@ img, video, svg { display: block; max-width: 100%; }
   font-weight: 500;
   letter-spacing: 0.06em;
 }
-.site-header nav a { position: relative; opacity: 0.8; transition: opacity 0.3s; }
+.site-header nav a {
+  font-weight: 700;
+  letter-spacing: 0.05em; position: relative; opacity: 0.8; transition: opacity 0.3s; }
 .site-header nav a:hover { opacity: 1; }
 .site-header nav a::after {
   content: ""; position: absolute; left: 0; bottom: -4px;
@@ -1535,7 +1537,7 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 .menu-btn i:nth-child(2) { top: 26px; }
 body.menu-open .menu-btn i:nth-child(1) { top: 21px; transform: rotate(45deg); }
 body.menu-open .menu-btn i:nth-child(2) { top: 21px; transform: rotate(-45deg); }
-body.menu-open .site-header { color: var(--ink); }
+body.menu-open .site-header { color: var(--ink); z-index: 4002; }
 @media (max-width: 960px) {
   .menu-btn { display: block; }
   .site-header nav .nav-cta { display: none; }
@@ -2345,14 +2347,15 @@ body.menu-open .brand-mark { filter: none; }
   opacity: 0;
   -webkit-mask-image: conic-gradient(#000 var(--sweep), transparent 0);
   mask-image: conic-gradient(#000 var(--sweep), transparent 0);
-  transform: scale(0.92) rotate(-8deg);
+  transform: scale(1.7) rotate(-320deg);
 }
 .loader.draw .ld-mark {
   opacity: 1;
-  animation: ldSweep 0.72s cubic-bezier(0.6, 0, 0.3, 1) forwards, ldSettle 0.3s ease 0.72s forwards;
+  animation: ldSweep 1.05s cubic-bezier(0.55, 0, 0.25, 1) forwards,
+             ldSwirl 1.3s cubic-bezier(0.22, 0.9, 0.24, 1) forwards;
 }
 @keyframes ldSweep { from { --sweep: 0deg; } to { --sweep: 360deg; } }
-@keyframes ldSettle { from { transform: scale(0.92) rotate(-8deg); } to { transform: scale(1) rotate(0deg); } }
+@keyframes ldSwirl { from { transform: scale(1.7) rotate(-320deg); } to { transform: scale(1) rotate(0deg); } }
 .loader.flip .ld-mark { filter: none; }
 .ld-word {
   display: flex;
@@ -2383,7 +2386,6 @@ body.menu-open .brand-mark { filter: none; }
 
 
 /* オープニング強化 */
-.loader.flash .ld-panel { background: #fff; transition: none; }
 .ld-ghost {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -2412,3 +2414,38 @@ body.menu-open .brand-mark { filter: none; }
   will-change: transform;
 }
 @keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+
+/* 黒背景でのゴーストティッカーは白系 */
+.rc-message .kinetic, .fin-dark .kinetic, .hero .kinetic, [data-scene="dark"] .kinetic {
+  color: rgba(255, 255, 255, 0.09);
+}
+
+/* JAPANラベル: 赤＋白フチで視認性確保 */
+.wm-origin-label {
+  fill: #c1272d !important;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+/* モバイルメニュー: 言語選択を上部のピル型に */
+.mm-lang {
+  position: absolute;
+  top: clamp(5.2rem, 16vw, 6.5rem);
+  left: clamp(1.6rem, 8vw, 4rem); right: clamp(1.6rem, 8vw, 4rem);
+  bottom: auto;
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  padding-top: 0;
+  border-top: none;
+}
+.mm-lang a {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--ink-70);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.34rem 0.8rem;
+  background: #fff;
+}
+.mm-lang a.cur { background: var(--ink); color: #fff; border-color: var(--ink); }

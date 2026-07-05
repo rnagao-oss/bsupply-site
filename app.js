@@ -17,23 +17,17 @@
     });
     word.textContent = '';
     chars.forEach((c) => word.appendChild(c));
-    setTimeout(() => loader.classList.add('flash'), 90);      /* 白の一閃 */
-    setTimeout(() => loader.classList.remove('flash'), 170);
-    setTimeout(() => loader.classList.add('draw'), 240);       /* 円が描かれる */
-    setTimeout(() => loader.classList.add('ghostin'), 760);    /* 巨大ゴースト降臨 */
+    setTimeout(() => loader.classList.add('draw'), 120);       /* 渦を巻きながら円が描かれる */
     setTimeout(() => {
-      loader.classList.add('word');                            /* B SUPPLY 打刻 */
-      chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 36));
-    }, 1050);
-    setTimeout(() => loader.classList.add('punch'), 1950);     /* ズームパンチ */
-    setTimeout(() => loader.classList.add('flip'), 2120);      /* 反転ストロボ */
-    setTimeout(() => loader.classList.remove('flip'), 2230);
-    setTimeout(() => loader.classList.add('flip'), 2340);
+      loader.classList.add('word');                             /* B SUPPLY 打刻 */
+      chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 40));
+    }, 1500);
+    setTimeout(() => loader.classList.add('flip'), 2650);       /* 白黒反転パンチ */
     setTimeout(() => {
-      loader.classList.add('done');                            /* 対角ワイプ */
+      loader.classList.add('done');                             /* 対角ワイプ */
       revealHeroTitle();
-    }, 2520);
-    setTimeout(() => loader.remove(), 3500);
+    }, 2880);
+    setTimeout(() => loader.remove(), 3900);
   } else {
     setTimeout(() => {
       const pt = document.querySelector('.page-title');
@@ -118,7 +112,8 @@
       prog += (tProg - prog) * 0.07;
       const dark = centerCovered(darkEls);
       const col = dark ? '245,245,242' : '15,15,14';
-      const maxA = dark ? 0.72 : 0.58;
+      const mobileDim = W <= 700 ? 0.38 : 1;  /* モバイルは文字可読性優先で気配レベル */
+      const maxA = (dark ? 0.72 : 0.58) * mobileDim;
       const ry = t * 0.16 + prog * Math.PI * 1.3 + mx;
       const rx = 0.35 + my + prog * 0.4 + Math.sin(t * 0.21) * 0.05;
       const cy = Math.cos(ry), sy = Math.sin(ry);
@@ -579,12 +574,11 @@
         svg.appendChild(oPulse);
       });
       const oLabel = document.createElementNS(NS, 'text');
-      const labelRight = ox + 14 + 58 > W;  /* 右端で切れる場合は左側に */
-      oLabel.setAttribute('x', labelRight ? ox - 14 : ox + 14);
-      oLabel.setAttribute('y', oy - 12);
-      if (labelRight) oLabel.setAttribute('text-anchor', 'end');
+      oLabel.setAttribute('x', ox - 16);
+      oLabel.setAttribute('y', oy - 24);
+      oLabel.setAttribute('text-anchor', 'end');
       oLabel.setAttribute('class', 'wm-label wm-origin-label on');
-      oLabel.textContent = 'JAPAN';
+      oLabel.textContent = '🇯🇵 JAPAN';
       svg.appendChild(oLabel);
 
       /* 巡回する光（アーク上を流れる粒） */
