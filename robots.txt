@@ -3,4 +3,4 @@ Allow: /
 Disallow: /thanks.html
 Disallow: /en/thanks.html
 
-Sitemap: https://rnagao-oss.github.io/bsupply-site/sitemap.xml
+Sitemap: https://bsupply.jp/sitemap.xml
