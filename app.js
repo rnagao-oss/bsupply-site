@@ -584,11 +584,11 @@
         svg.appendChild(oPulse);
       });
       const oLabel = document.createElementNS(NS, 'text');
-      oLabel.setAttribute('x', ox - 16);
-      oLabel.setAttribute('y', oy - 24);
-      oLabel.setAttribute('text-anchor', 'end');
+      oLabel.setAttribute('x', ox + 6);
+      oLabel.setAttribute('y', oy + 22);
+      oLabel.setAttribute('text-anchor', 'middle');
       oLabel.setAttribute('class', 'wm-label wm-origin-label on');
-      oLabel.textContent = '🇯🇵 JAPAN';
+      oLabel.textContent = 'JAPAN';
       svg.appendChild(oLabel);
 
       /* 巡回する光（アーク上を流れる粒） */
