@@ -37,8 +37,10 @@
 
   /* ── ドットスフィア（モノクロ・許可セクションのみ・スクロール/マウス駆動） ── */
   (() => {
-    const allowed = [...document.querySelectorAll('[data-sphere="on"]')];
-    if (!allowed.length) return;
+    const allowedAll = [...document.querySelectorAll('[data-sphere="on"]')];
+    if (!allowedAll.length) return;
+    /* モバイルは文字との重なりを避けるためトップビュー（hero/thanks）のみ表示。デスクトップは全箇所 */
+    const heroOnly = allowedAll.filter((el) => el.classList.contains('hero') || el.classList.contains('thanks-hero'));
 
     const canvas = document.createElement('canvas');
     canvas.className = 'sphere-canvas';
@@ -103,7 +105,7 @@
     (function frame(now) {
       requestAnimationFrame(frame);
       if (hiddenTab) return;
-      const tVis = centerCovered(allowed) ? 1 : 0;
+      const tVis = centerCovered(W <= 900 ? heroOnly : allowedAll) ? 1 : 0;
       vis += (tVis - vis) * 0.06;
       ctx.clearRect(0, 0, W, H);
       if (vis < 0.02) return;
@@ -310,9 +312,9 @@
   const progressBar = document.getElementById('progressBar');
   const hero = document.getElementById('hero');
   /* ゴーストテキスト：ティッカー化（複製してループ） */
-  /* 画面幅比の共通速度（モバイルでも同じ体感）。フォント/画像の読み込みで
-     帯の幅が後から変わっても、ResizeObserverで常に同じ速度に補正する */
-  const PXPS = () => Math.max(11, innerWidth / 34);
+  /* 共通速度。PCは画面幅比（1440pxで約42px/s）、モバイルは下限24px/sで体感を揃える。
+     フォント/画像の読み込みで帯の幅が後から変わっても、ResizeObserverで常に同じ速度に補正する */
+  const PXPS = () => Math.max(24, innerWidth / 34);
   const keepSpeed = (el, apply) => {
     const sync = () => {
       const halfW = el.scrollWidth / 2;
