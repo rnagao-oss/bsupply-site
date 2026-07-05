@@ -262,8 +262,8 @@ img, video, svg { display: block; max-width: 100%; }
 @keyframes ghostFlowR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .kinetic.outline { color: rgba(15, 15, 14, 0.045); }
 .statement { overflow: hidden; }
-.cv-block { position: relative; overflow: visible; }
-.cv-block .kinetic { top: 0.5rem; }
+.cv-block { position: relative; overflow: hidden; padding-top: clamp(8rem, 14vw, 12rem); }
+.cv-block .kinetic { top: 0; }
 
 /* ═══ STATEMENT ═══ */
 .statement {
