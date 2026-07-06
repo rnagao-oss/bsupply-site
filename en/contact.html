@@ -10,7 +10,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/img/logo.png" rel="icon" type="image/png"/>
-<link href="../styles.css?v=20260761" rel="stylesheet"/>
+<link href="../styles.css?v=20260763" rel="stylesheet"/>
 
 
 
@@ -124,11 +124,25 @@
 <input accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" name="attachment" type="file"/>
 <small>Resume or other documents (PDF, Word, images — up to 10MB)</small>
 </label>
+<p class="ct-privacy-note">By submitting this form, you agree to the <a href="#" id="privacyOpen">handling of personal information</a>.</p>
 <button class="ct-submit" type="submit">Submit<em>→</em></button>
-<p class="ct-note">The information you provide will be used solely to respond to your inquiry.</p>
 </form>
 </section>
 </main>
+<dialog class="pv-dlg" id="privacyDlg">
+<h2>Handling of Personal Information</h2>
+<p>B supply Inc. handles personal information provided in connection with inquiries as follows.</p>
+<p>1. Purpose of use: Your personal information will be used to respond to your inquiry, send materials, arrange meetings, and provide related communications.</p>
+<p>2. Third-party disclosure: We will not provide your personal information to third parties except with your consent or as required by law.</p>
+<p>3. Security: We take appropriate measures to prevent unauthorized access to, loss of, or leakage of personal information.</p>
+<p>4. Disclosure, correction, deletion: We will respond promptly and within reason to requests for disclosure, correction, or deletion.</p>
+<p>5. Contact: Please reach us via our contact form.</p>
+<button class="pv-close" id="privacyClose" type="button">Close</button>
+</dialog>
+<script>
+document.getElementById('privacyOpen').addEventListener('click', function (e) { e.preventDefault(); document.getElementById('privacyDlg').showModal(); });
+document.getElementById('privacyClose').addEventListener('click', function () { document.getElementById('privacyDlg').close(); });
+</script>
 <footer class="footer">
 <span class="ft-brand"><img alt="" class="ft-mark" src="../assets/img/logo.png"/>B supply</span>
 <nav class="ft-nav">

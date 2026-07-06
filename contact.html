@@ -10,7 +10,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Noto+Sans+JP:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="./assets/img/logo.png" rel="icon" type="image/png"/>
-<link href="./styles.css?v=20260761" rel="stylesheet"/>
+<link href="./styles.css?v=20260763" rel="stylesheet"/>
 
 
 
@@ -124,11 +124,25 @@
 <input accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" name="attachment" type="file"/>
 <small>履歴書・各種資料など（PDF・Word・画像、10MBまで）</small>
 </label>
+<p class="ct-privacy-note">送信により、<a href="#" id="privacyOpen">個人情報の取り扱い</a>に同意したものとします。</p>
 <button class="ct-submit" type="submit">送信する<em>→</em></button>
-<p class="ct-note">お預かりした情報は、お問い合わせへの対応にのみ使用します。</p>
 </form>
 </section>
 </main>
+<dialog class="pv-dlg" id="privacyDlg">
+<h2>個人情報の取り扱いについて</h2>
+<p>株式会社B supplyは、お問い合わせに際してご提供いただいた個人情報を、以下のとおり取り扱います。</p>
+<p>1. 利用目的：ご提供いただいた個人情報は、お問い合わせへの回答、資料送付、商談・面談の日程調整、関連するご連絡のために利用します。</p>
+<p>2. 第三者提供：ご本人の同意がある場合または法令に基づく場合を除き、個人情報を第三者に提供することはありません。</p>
+<p>3. 管理：個人情報への不正アクセス、紛失、漏えい等を防止するため、適切な安全管理措置を講じます。</p>
+<p>4. 開示・訂正・削除：ご本人からの開示・訂正・削除のご請求には、合理的な範囲で速やかに対応します。</p>
+<p>5. お問い合わせ窓口：当社お問い合わせフォームよりご連絡ください。</p>
+<button class="pv-close" id="privacyClose" type="button">閉じる</button>
+</dialog>
+<script>
+document.getElementById('privacyOpen').addEventListener('click', function (e) { e.preventDefault(); document.getElementById('privacyDlg').showModal(); });
+document.getElementById('privacyClose').addEventListener('click', function () { document.getElementById('privacyDlg').close(); });
+</script>
 <footer class="footer">
 <span class="ft-brand"><img alt="" class="ft-mark" src="./assets/img/logo.png"/>B supply</span>
 <nav class="ft-nav">
