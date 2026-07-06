@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://bsupply.jp/apply.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/apply.html"/>
+    <lastmod>2026-07-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bsupply.jp/en/apply.html</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/apply.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/apply.html"/>
+    <lastmod>2026-07-06</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://bsupply.jp/case-01.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/case-01.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/case-01.html"/>

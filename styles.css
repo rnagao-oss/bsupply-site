@@ -1297,6 +1297,47 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
 .ct-submit em { font-style: normal; }
 .ct-note { margin-top: 1.2rem; font-size: 0.78rem; color: var(--gray); }
 
+/* 応募フォーム：セレクト・同意欄 */
+.ct-field select {
+  width: 100%;
+  font-family: var(--jp);
+  font-size: 1rem;
+  padding: 0.85rem 2.6rem 0.85rem 1rem;
+  border: 1px solid var(--line);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 1rem center;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  color: var(--ink);
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+.ct-field select:focus { outline: none; border-color: var(--ink); }
+.ct-consent {
+  border: 1px solid var(--line);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.8rem;
+}
+.ct-consent p { font-size: 0.78rem; color: var(--gray); line-height: 1.9; margin-bottom: 0.85rem; }
+.ct-consent label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.ct-consent input { width: 1.05rem; height: 1.05rem; accent-color: var(--ink); cursor: pointer; }
+.ct-consent em {
+  font-style: normal;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--ink);
+  padding: 0.1rem 0.5rem;
+  margin-left: 0.2rem;
+}
+
 
 /* 地図：巡回する光 */
 .wm-traveler { fill: var(--ink); opacity: 0; }
