@@ -94,7 +94,7 @@ img, video, svg { display: block; max-width: 100%; }
 }
 .brand {
   font-family: var(--en);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -1883,7 +1883,7 @@ main > .rc-message:first-child { padding-top: clamp(7.5rem, 13vw, 10rem); }
 
 /* ═══ ロゴ ═══ */
 .brand { display: inline-flex; align-items: center; gap: 0.55rem; }
-.brand-mark { width: 36px; height: 36px; object-fit: contain; filter: invert(1); transition: filter 0.5s var(--ease); }
+.brand-mark { width: 40px; height: 40px; object-fit: contain; filter: invert(1); transition: filter 0.5s var(--ease); }
 .site-header.light .brand-mark, .site-header.scrolled .brand-mark { filter: none; }
 body.menu-open .brand-mark { filter: none; }
 .ft-brand { display: inline-flex; align-items: center; gap: 0.5rem; }
