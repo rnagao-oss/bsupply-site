@@ -449,22 +449,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://bsupply.jp/job-sales-associate.html</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/job-sales-associate.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/job-sales-associate.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/job-sales-associate.html"/>
-    <lastmod>2026-07-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://bsupply.jp/en/job-sales-associate.html</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/job-sales-associate.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/job-sales-associate.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/job-sales-associate.html"/>
-    <lastmod>2026-07-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://bsupply.jp/manufacturing.html</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/manufacturing.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/manufacturing.html"/>
