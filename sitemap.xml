@@ -321,18 +321,18 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://bsupply.jp/index.html</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/index.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/index.html"/>
+    <loc>https://bsupply.jp/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/"/>
     <lastmod>2026-07-06</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://bsupply.jp/en/index.html</loc>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/index.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/index.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/index.html"/>
+    <loc>https://bsupply.jp/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://bsupply.jp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bsupply.jp/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bsupply.jp/"/>
     <lastmod>2026-07-06</lastmod>
     <priority>1.0</priority>
   </url>
