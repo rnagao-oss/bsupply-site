@@ -646,24 +646,9 @@ dialog#privacyDlg .btns{margin-top:20px}
     $('#doSend').disabled = true;
     $('#backToEdit').disabled = true;
     $('#sendNote').hidden = false;
-    /* 非表示iframeへ通常POST（添付ファイル対応）→ 応答を検知したら自前のthanksへ遷移。
-       FormSubmit側のリダイレクト（_next）には依存しない */
-    const dest = form.querySelector('input[name="_next"]').value;
-    const sink = document.createElement('iframe');
-    sink.name = 'apSink';
-    sink.hidden = true;
-    document.body.appendChild(sink);
-    let redirected = false;
-    const done = () => {
-      if (redirected) return;
-      redirected = true;
-      location.href = dest;
-    };
-    const t0 = Date.now();
-    /* 500ms未満のloadはiframe初期化イベントとみなし無視。8秒で必ず遷移 */
-    sink.addEventListener('load', () => { if (Date.now() - t0 > 500) done(); });
-    setTimeout(done, 8000);
-    form.target = 'apSink';
+    /* 通常POST（お問い合わせフォームと同方式・添付対応）。
+       結果ページが必ず表示されるため、送信失敗が応募者に見えないまま
+       完了画面に進むことがない。成功時は _next で thanks へ戻る */
     form.submit();
   });
 })();
