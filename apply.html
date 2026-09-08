@@ -206,12 +206,12 @@ dialog#privacyDlg .btns{margin-top:20px}
 <div class="card-body">
 <div id="inputView">
 <p class="intro">以下のフォームに必要事項を入力してください。</p>
-<form action="https://formsubmit.co/r.nagao@b--supply.com" enctype="multipart/form-data" id="apForm" method="POST">
-<input name="_subject" type="hidden" value="【B supplyサイト】採用エントリー"/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="_next" type="hidden" value="https://bsupply.jp/thanks.html"/>
-<input name="_template" type="hidden" value="table"/>
-<input name="_honey" style="display:none" type="text"/>
+<form action="https://api.web3forms.com/submit" id="apForm" method="POST">
+<input name="access_key" type="hidden" value="394f1bc6-8956-4084-98cc-a8ec1f6e72c5"/>
+<input name="subject" type="hidden" value="【B supplyサイト】採用エントリー"/>
+<input name="redirect" type="hidden" value="https://bsupply.jp/thanks.html"/>
+<input name="from_name" type="hidden" value="B supplyサイト（応募フォーム）"/>
+<input name="botcheck" style="display:none" type="checkbox"/>
 <section class="fs">
 <h3 class="fs-t">応募ポジション</h3>
 <div class="f-row">
@@ -603,7 +603,7 @@ dialog#privacyDlg .btns{margin-top:20px}
   }
 
   /* 送信 */
-  const subj = form.querySelector('input[name="_subject"]');
+  const subj = form.querySelector('input[name="subject"]');
   const subjBase = subj.value;
   $('#doSend').addEventListener('click', () => {
     const o = sel.selectedOptions[0];
@@ -618,7 +618,7 @@ dialog#privacyDlg .btns{margin-top:20px}
     $$('#cfList > div').forEach((row) => {
       lines.push(`${$('dt', row).textContent}：${$('dd', row).textContent}`);
     });
-    const KEEP = new Set(['_subject', '_captcha', '_next', '_template', '_honey', '応募ポジション', '氏名', 'email', '電話番号']);
+    const KEEP = new Set(['access_key', 'subject', 'redirect', 'from_name', 'botcheck', '応募ポジション', '氏名', 'email', '電話番号']);
     $$('input, select, textarea', form).forEach((el) => {
       if (el.name && !KEEP.has(el.name)) el.disabled = true;
     });
