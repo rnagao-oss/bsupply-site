@@ -420,17 +420,8 @@ dialog#privacyDlg .btns{margin-top:20px}
 </div>
 </section>
 <section class="fs">
-<h3 class="fs-t">添付ファイル</h3>
-<p class="fs-note">履歴書・職務経歴書・ポートフォリオなど。アップロード可能なファイルの最大サイズは合計10MBです。最大4ファイルまで登録できます。</p>
-<div class="f-row">
-<div class="f-lab"><label>添付ファイル</label></div>
-<div class="f-in">
-<button class="file-pick" id="filePick" type="button">＋ ファイルを選択</button>
-<input accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png" hidden="" id="fileInput" multiple="" name="attachment" type="file"/>
-<ul class="file-list" id="fileList"></ul>
-<p class="file-err" hidden="" id="fileErr">ファイルは最大4つ・合計10MBまでです。選び直してください。</p>
-</div>
-</div>
+<h3 class="fs-t">応募書類について</h3>
+<p class="fs-note">履歴書・職務経歴書・ポートフォリオ等の書類は、ご応募後に r.nagao@b--supply.com 宛へメールでお送りください。ご応募を確認し次第、担当者からもご連絡いたします。</p>
 </section>
 <section class="fs">
 <h3 class="fs-t">応募先へのメッセージ</h3>
@@ -549,28 +540,6 @@ dialog#privacyDlg .btns{margin-top:20px}
     });
   });
 
-  /* 添付ファイル */
-  const fi = $('#fileInput');
-  const fileErr = $('#fileErr');
-  $('#filePick').addEventListener('click', () => fi.click());
-  fi.addEventListener('change', () => {
-    const files = [...fi.files];
-    const total = files.reduce((s, f) => s + f.size, 0);
-    const list = $('#fileList');
-    list.textContent = '';
-    if (files.length > 4 || total > 10 * 1024 * 1024) {
-      fi.value = '';
-      fileErr.hidden = false;
-      return;
-    }
-    fileErr.hidden = true;
-    files.forEach((f) => {
-      const li = document.createElement('li');
-      li.textContent = `${f.name}（${Math.max(1, Math.round(f.size / 1024))}KB）`;
-      list.appendChild(li);
-    });
-  });
-
   /* 個人情報モーダル */
   $('#privacyOpen').addEventListener('click', (e) => { e.preventDefault(); $('#privacyDlg').showModal(); });
   $('#privacyClose').addEventListener('click', () => $('#privacyDlg').close());
@@ -614,10 +583,6 @@ dialog#privacyDlg .btns{margin-top:20px}
           if (el.checked) parts.push(el.closest('label').textContent.trim());
           return;
         }
-        if (el.type === 'file') {
-          parts.push([...el.files].map((f) => f.name).join(', '));
-          return;
-        }
         if (el.tagName === 'SELECT') {
           const o = el.selectedOptions[0];
           parts.push(o && o.value ? o.textContent.trim() : '');
@@ -646,9 +611,22 @@ dialog#privacyDlg .btns{margin-top:20px}
     $('#doSend').disabled = true;
     $('#backToEdit').disabled = true;
     $('#sendNote').hidden = false;
-    /* 通常POST（お問い合わせフォームと同方式・添付対応）。
-       結果ページが必ず表示されるため、送信失敗が応募者に見えないまま
-       完了画面に進むことがない。成功時は _next で thanks へ戻る */
+    /* 配信実績のあるお問い合わせフォームと同じ構成（少数フィールド＋本文1本）に
+       まとめて通常POSTする。多数フィールドの送信はFormSubmitが成功表示のまま
+       不達になる事象を確認済み（2026-09-08）。結果ページが必ず表示され失敗が隠れない */
+    const lines = [];
+    $$('#cfList > div').forEach((row) => {
+      lines.push(`${$('dt', row).textContent}：${$('dd', row).textContent}`);
+    });
+    const KEEP = new Set(['_subject', '_captcha', '_next', '_template', '_honey', '応募ポジション', '氏名', 'email', '電話番号']);
+    $$('input, select, textarea', form).forEach((el) => {
+      if (el.name && !KEEP.has(el.name)) el.disabled = true;
+    });
+    const body = document.createElement('textarea');
+    body.name = '応募内容';
+    body.hidden = true;
+    body.value = lines.join('\n');
+    form.appendChild(body);
     form.submit();
   });
 })();
