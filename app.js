@@ -209,7 +209,7 @@
     }
   })();
 
-  /* ── ワープトンネル（モノクロ・許可セクションのみ・スクロール/マウス駆動） ── */
+  /* ── ドットスフィア（モノクロ・許可セクションのみ・スクロール/マウス駆動） ── */
   (() => {
     const allowedAll = [...document.querySelectorAll('[data-sphere="on"]')];
     if (!allowedAll.length) return;
@@ -231,49 +231,31 @@
       R = Math.min(W, H) * (W > 900 ? 0.37 : 0.34);
       CX = W > 900 ? W * 0.74 : W * 0.5;
       CY = H * 0.52;
-      /* PCと同じ「微細な星屑」の質感: 円が小さい画面ほど点も細かく */
+      /* PCと同じ「微細な星屑」の質感: 球が小さい画面ほど点も細かく */
       DS = W > 900 ? 1 : 0.78;
     }
     size();
     addEventListener('resize', size);
 
-    /* パラメータ（円形の範囲内に収まるよう正規化座標は半径1以内で完結させる） */
-    const FOCAL = 0.14;
-    const STEP_Z = 0.0026;
-    const STAR_SCALE = 0.75;
-    const TURB = 0.16;
-    const GLITTER = 0.24;
-    const TRAIL = 0.62;
-
-    let elapsed = 0;
-    const countFor = () => (W > 900 ? 340 : 200);
+    const N = 4400;
+    const GA = Math.PI * (3 - Math.sqrt(5));
     const pts = [];
-
-    function resetStar(s, initial) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 0.15 + Math.random() * 0.85;
-      s.x = Math.cos(angle) * radius;
-      s.y = Math.sin(angle) * radius;
-      s.z = initial ? FOCAL + Math.random() * (1 - FOCAL) : 1.0;
-      s.px = NaN; s.py = NaN;
-      s.seed = Math.random() * 1000;
-      s.vmul = 0.65 + Math.random() * 0.75;
-      s.big = Math.random() < 0.12;
-      s.flashUntil = 0;
-      s.nextFlash = elapsed + 1 + (Math.random() * 4.2) / GLITTER;
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i / (N - 1)) * 2;
+      const rad = Math.sqrt(1 - y * y);
+      const th = GA * i;
+      pts.push({
+        x: Math.cos(th) * rad, y, z: Math.sin(th) * rad,
+        tw: (i % 23) / 23 * Math.PI * 2,
+        ph: (i % 97) / 97 * Math.PI * 2,
+        big: i % 9 === 0,
+      });
     }
-    function syncCount() {
-      const n = countFor();
-      if (pts.length === n) return;
-      if (pts.length > n) { pts.length = n; }
-      else { while (pts.length < n) { const s = {}; resetStar(s, true); pts.push(s); } }
-    }
-    syncCount();
 
     let mx = 0, my = 0, tmx = 0, tmy = 0;
     addEventListener('pointermove', (e) => {
-      tmx = (e.clientX / innerWidth - 0.5) * 0.5;
-      tmy = (e.clientY / innerHeight - 0.5) * 0.3;
+      tmx = (e.clientX / innerWidth - 0.5) * 0.6;
+      tmy = (e.clientY / innerHeight - 0.5) * 0.35;
     }, { passive: true });
 
     let prog = 0, tProg = 0;
@@ -290,104 +272,49 @@
       return r.top < H * 0.6 && r.bottom > H * 0.35;
     });
 
-    let vis = 0, hiddenTab = false, lastT = null;
+    const F = 2.6;
+    let vis = 0, hiddenTab = false;
     document.addEventListener('visibilitychange', () => { hiddenTab = document.hidden; });
 
     (function frame(now) {
       requestAnimationFrame(frame);
       if (hiddenTab) return;
-      if (lastT == null) lastT = now;
-      const deltaSec = Math.max(0.001, Math.min(0.1, (now - lastT) / 1000));
-      lastT = now;
-      elapsed += deltaSec;
-
       const tVis = centerCovered(W <= 900 ? heroOnly : allowedAll) ? 1 : 0;
       vis += (tVis - vis) * 0.06;
-      syncCount();
+      ctx.clearRect(0, 0, W, H);
+      if (vis < 0.02) return;
 
       const t = now / 1000;
-      mx += (tmx - mx) * 0.05;
-      my += (tmy - my) * 0.05;
+      mx += (tmx - mx) * 0.045;
+      my += (tmy - my) * 0.045;
       prog += (tProg - prog) * 0.07;
       const dark = centerCovered(darkEls);
       const col = dark ? '245,245,242' : '15,15,14';
-      const maxA = dark ? 0.82 : 0.64;
-      const colStr = `rgb(${col})`;
-      const dt = deltaSec * 60;
-      const stepZ = STEP_Z * (1 + prog * 0.6);
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(CX, CY, R + 8, 0, Math.PI * 2);
-      ctx.clip();
-
-      /* 微かな航跡だけ残して消えるトレイル（比率をdtで正規化し、リフレッシュレートに依存させない） */
-      const keep = Math.pow(Math.min(0.98, Math.max(0, TRAIL)), dt);
-      const trailAlpha = Math.max(0.03, 1 - keep);
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = `rgba(0,0,0,${trailAlpha})`;
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.globalCompositeOperation = 'lighter';
-      for (const s of pts) {
-        s.z -= stepZ * s.vmul * dt;
-        if (s.z <= FOCAL) { resetStar(s, false); continue; }
-
-        let tx = s.x, ty = s.y;
-        if (TURB > 0) {
-          const wob = elapsed * 1.2 + s.seed;
-          const amp = TURB * (1 - s.z) * 0.25;
-          tx += Math.sin(wob + s.seed) * amp;
-          ty += Math.cos(wob * 1.13 + s.seed * 0.7) * amp;
-        }
-        tx += mx * 0.18 * (1 - s.z);
-        ty += my * 0.12 * (1 - s.z);
-
-        const persp = FOCAL / Math.max(s.z, 0.0001);
-        const sx = CX + tx * persp * R;
-        const sy = CY + ty * persp * R;
-
-        let flashMult = 1;
-        if (GLITTER > 0) {
-          if (elapsed >= s.nextFlash && s.flashUntil < elapsed) {
-            s.flashUntil = elapsed + 0.04 + Math.random() * 0.07;
-            s.nextFlash = elapsed + 1 + (Math.random() * 4.2) / GLITTER;
-          }
-          if (elapsed <= s.flashUntil) flashMult = 1 + 2.2 * GLITTER;
-        }
-
-        const sizePersp = Math.min(2.5, persp * 0.6);
-        const baseR = Math.max(0.25, STAR_SCALE * (0.4 + sizePersp)) * (s.big ? 1.5 : 1);
-        const maxR = (1 + STAR_SCALE * 2.5) * (s.big ? 1.5 : 1);
-        const r = Math.min(baseR * flashMult, maxR) * DS;
-
-        const lifeT = 1 - s.z;
-        const a = Math.min(1, lifeT * 0.9 + 0.05) * maxA * vis * (flashMult > 1 ? 1 : 0.85);
-
-        if (!Number.isNaN(s.px) && !Number.isNaN(s.py)) {
-          ctx.globalAlpha = a * 0.5;
-          ctx.strokeStyle = colStr;
-          ctx.lineWidth = Math.max(0.4, r * 0.4);
-          ctx.beginPath();
-          ctx.moveTo(s.px, s.py);
-          ctx.lineTo(sx, sy);
-          ctx.stroke();
-        }
-
-        ctx.globalAlpha = a;
-        ctx.fillStyle = colStr;
-        ctx.fillRect(sx - r, sy - r, r * 2, r * 2);
-        if (flashMult > 1) {
-          const rf = Math.min(r * 1.4, maxR * 1.4);
-          ctx.globalAlpha = a * 0.5;
-          ctx.fillRect(sx - rf, sy - rf, rf * 2, rf * 2);
-        }
-
-        s.px = sx; s.py = sy;
+      const maxA = dark ? 0.72 : 0.58;
+      const ry = t * 0.16 + prog * Math.PI * 1.3 + mx;
+      const rx = 0.35 + my + prog * 0.4 + Math.sin(t * 0.21) * 0.05;
+      const cy = Math.cos(ry), sy = Math.sin(ry);
+      const cx = Math.cos(rx), sx = Math.sin(rx);
+      for (const p of pts) {
+        /* 有機的な呼吸: 半径がゆっくり脈動し、表面が生きて見える */
+        const br = 1 + Math.sin(t * 0.8 + p.ph) * 0.022;
+        const bx = p.x * br, by = p.y * br, bz = p.z * br;
+        let x = bx * cy + bz * sy;
+        let z = -bx * sy + bz * cy;
+        const y = by * cx - z * sx;
+        z = by * sx + z * cx;
+        const sc = F / (F - z);
+        const sxp = CX + x * R * sc;
+        const syp = CY + y * R * sc;
+        const depth = (z + 1) / 2;
+        const d2 = depth * depth;
+        const tw = 0.86 + 0.14 * Math.sin(t * 1.4 + p.tw);
+        const alpha = (0.05 + d2 * maxA) * tw * vis * (p.big ? 1.3 : 1);
+        ctx.beginPath();
+        ctx.arc(sxp, syp, ((p.big ? 0.85 : 0.45) + d2 * (p.big ? 1.2 : 0.65)) * DS, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${col},${alpha})`;
+        ctx.fill();
       }
-      ctx.globalAlpha = 1;
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.restore();
     })(0);
   })();
 
