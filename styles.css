@@ -710,21 +710,29 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
   padding: clamp(1.8rem, 2.8vw, 2.6rem);
   min-height: clamp(13rem, 18vw, 16rem);
   display: flex; flex-direction: column; justify-content: flex-start; gap: 0.8rem;
-  padding-top: clamp(4.6rem, 6.5vw, 6rem);
   overflow: hidden;
   transition: background 0.55s var(--ease);
 }
-.rs-no {
-  position: absolute; top: 1.1rem; right: 1.3rem;
-  font-family: var(--en);
-  font-size: clamp(2.6rem, 4.4vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--gray-2);
-  transition: color 0.55s var(--ease), -webkit-text-stroke-color 0.55s var(--ease);
+.rs-index {
+  display: flex; align-items: center; gap: 0.9rem;
 }
+.rs-index span {
+  font-family: var(--en);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gray);
+  transition: color 0.55s var(--ease);
+}
+.rs-index::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  transition: background 0.55s var(--ease);
+}
+.rs-card:hover .rs-index span { color: rgba(255, 255, 255, 0.65); }
+.rs-card:hover .rs-index::after { background: rgba(255, 255, 255, 0.22); }
 .rs-card h3 {
   font-weight: 700;
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
@@ -1477,7 +1485,7 @@ a.sn-item:hover .sn-link::after { transform: scaleX(1); }
   stroke-dashoffset: 339.3;
   transition: stroke-dashoffset 1.6s cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
 }
-.data-cell.in .donut-f { stroke-dashoffset: 75.4; } /* 女性 77.8% */
+.data-cell.in .donut-f { stroke-dashoffset: 101.8; } /* 女性 70.0% */
 .donut-num {
   font-family: var(--en);
   font-size: 30px;
