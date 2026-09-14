@@ -21,193 +21,19 @@
     setTimeout(() => {
       loader.classList.add('word');                             /* B SUPPLY 打刻 */
       chars.forEach((c, i) => setTimeout(() => c.classList.add('in'), i * 40));
-    }, 1100);
-    setTimeout(() => loader.classList.add('flip'), 2000);       /* 白黒反転パンチ */
+    }, 1500);
+    setTimeout(() => loader.classList.add('flip'), 2650);       /* 白黒反転パンチ */
     setTimeout(() => {
       loader.classList.add('done');                             /* 対角ワイプ */
       revealHeroTitle();
-    }, 2200);
-    setTimeout(() => loader.remove(), 3100);
+    }, 2880);
+    setTimeout(() => loader.remove(), 3900);
   } else {
     setTimeout(() => {
       const pt = document.querySelector('.page-title');
       if (pt) staggerIn(pt, 100);
     }, 200);
   }
-
-  /* ── ヒーローの繊維束 ── */
-  (() => {
-    const canvas = document.getElementById('heroFibre');
-    if (!canvas) return;
-    const section = canvas.closest('.hero');
-    let gl;
-    try {
-      gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: false });
-    } catch {
-      return;
-    }
-    if (!gl) return;
-
-    const precision = gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.HIGH_FLOAT).precision ? 'highp' : 'mediump';
-    const compile = (type, source) => {
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return shader;
-      gl.deleteShader(shader);
-      return null;
-    };
-    const vertex = compile(gl.VERTEX_SHADER, `
-      attribute vec2 aPosition;
-      void main() { gl_Position = vec4(aPosition, 0.0, 1.0); }
-    `);
-    const fragment = compile(gl.FRAGMENT_SHADER, `
-      precision ${precision} float;
-      uniform vec2 uResolution;
-      uniform vec2 uSize;
-      uniform vec2 uPointer;
-      uniform float uHover;
-      uniform float uTime;
-      void main() {
-        vec2 uv = gl_FragCoord.xy / uResolution;
-        uv.y = 1.0 - uv.y;
-        vec2 scale = vec2(uSize.x / uSize.y, 1.0);
-        vec2 p = (uv - vec2(0.68, 0.48)) * scale;
-        vec2 delta = (uv - uPointer) * scale;
-        float radius = 0.22;
-        float falloff = exp(-dot(delta, delta) / (radius * radius));
-        p += delta / max(length(delta), 0.001) * falloff * uHover * 0.10;
-
-        float angle = radians(-12.0);
-        p = mat2(cos(angle), -sin(angle), sin(angle), cos(angle)) * p;
-        // The Lorentzian has a full width at half maximum of 1.2 CSS pixels.
-        float halfWidth = 0.6;
-        float w = halfWidth * halfWidth;
-        float light = 0.0;
-        for (int i = 0; i < 20; i++) {
-          float strand = (float(i) + 0.5) / 20.0;
-          float side = strand * 2.0 - 1.0;
-          float edge = abs(side);
-          float a = 0.18 + edge * 0.34;
-          float c = 0.10 + side * 0.028 + sin(uTime * 0.16) * 0.025;
-          float b = 0.06 - edge * 0.20 + side * 0.025;
-          b += sin(uTime * 0.20 + strand * 0.6) * 0.008;
-          float x = p.x - c;
-          float slope = 2.0 * a * x;
-          float d = abs(p.y - (a * x * x + b)) * uSize.y / sqrt(1.0 + slope * slope);
-          float brightness = mix(0.20, 1.0, smoothstep(-scale.x * 0.62, scale.x * 0.38, p.x));
-          light += w / (w + d * d) * brightness;
-        }
-        gl_FragColor = vec4(1.0, 1.0, 1.0, min(light, 1.0) * 0.55);
-      }
-    `);
-    if (!vertex || !fragment) {
-      if (vertex) gl.deleteShader(vertex);
-      if (fragment) gl.deleteShader(fragment);
-      return;
-    }
-    const program = gl.createProgram();
-    if (!program) {
-      gl.deleteShader(vertex);
-      gl.deleteShader(fragment);
-      return;
-    }
-    gl.attachShader(program, vertex);
-    gl.attachShader(program, fragment);
-    gl.linkProgram(program);
-    gl.deleteShader(vertex);
-    gl.deleteShader(fragment);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      gl.deleteProgram(program);
-      return;
-    }
-    const buffer = gl.createBuffer();
-    if (!buffer) {
-      gl.deleteProgram(program);
-      return;
-    }
-    gl.useProgram(program);
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    const position = gl.getAttribLocation(program, 'aPosition');
-    gl.enableVertexAttribArray(position);
-    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-    const uniforms = Object.fromEntries(['uResolution', 'uSize', 'uPointer', 'uHover', 'uTime'].map((name) =>
-      [name, gl.getUniformLocation(program, name)]));
-
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let width = 0, height = 0, visible = false, lost = false, needsDraw = true;
-    let raf = 0, lastTime = 0, elapsed = 0;
-    let x = 0.62, y = 0.5, targetX = x, targetY = y, hover = 0, targetHover = 0;
-    const stop = () => {
-      cancelAnimationFrame(raf);
-      raf = 0;
-      lastTime = 0;
-    };
-    const schedule = () => {
-      if (!raf && visible && !document.hidden && !lost && width && height && (!reduced || needsDraw)) {
-        raf = requestAnimationFrame(draw);
-      }
-    };
-    function draw(now) {
-      raf = 0;
-      if (!visible || document.hidden || lost) return;
-      if (!reduced) {
-        if (lastTime) elapsed += Math.min((now - lastTime) / 1000, 0.1);
-        lastTime = now;
-        x += (targetX - x) * 0.08;
-        y += (targetY - y) * 0.08;
-        hover += (targetHover - hover) * 0.08;
-      }
-      gl.uniform2f(uniforms.uResolution, canvas.width, canvas.height);
-      gl.uniform2f(uniforms.uSize, width, height);
-      gl.uniform2f(uniforms.uPointer, x, y);
-      gl.uniform1f(uniforms.uHover, hover);
-      gl.uniform1f(uniforms.uTime, elapsed);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-      needsDraw = false;
-      schedule();
-    }
-    new ResizeObserver(() => {
-      const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      const nextWidth = Math.max(1, Math.round(width * dpr));
-      const nextHeight = Math.max(1, Math.round(height * dpr));
-      if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
-        canvas.width = nextWidth;
-        canvas.height = nextHeight;
-        gl.viewport(0, 0, nextWidth, nextHeight);
-        needsDraw = true;
-      }
-      schedule();
-    }).observe(canvas);
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) schedule();
-      else stop();
-    }).observe(section);
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop();
-      else schedule();
-    });
-    canvas.addEventListener('webglcontextlost', () => {
-      lost = true;
-      stop();
-    });
-    if (!reduced) {
-      section.addEventListener('pointermove', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        targetX = (event.clientX - rect.left) / rect.width;
-        targetY = (event.clientY - rect.top) / rect.height;
-        targetHover = 1;
-      }, { passive: true });
-      section.addEventListener('pointerleave', () => { targetHover = 0; });
-      section.addEventListener('pointercancel', () => { targetHover = 0; });
-    }
-  })();
 
   /* ── ドットスフィア（モノクロ・許可セクションのみ・スクロール/マウス駆動） ── */
   (() => {
@@ -467,22 +293,8 @@
     });
   }
   function revealHeroTitle() {
-    const hero = document.getElementById('hero');
-    if (!hero || hero.classList.contains('in')) return;
-    hero.classList.add('in');
-    const titleEl = hero.querySelector('.hero-title');
-    if (titleEl) staggerIn(titleEl, 150);
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    setTimeout(() => {
-      const words = [...hero.querySelectorAll('#heroGhost > span')];
-      if (words.length < 2) return;
-      let index = Math.max(0, words.findIndex((word) => word.classList.contains('is-on')));
-      setInterval(() => {
-        words[index].classList.remove('is-on');
-        index = (index + 1) % words.length;
-        words[index].classList.add('is-on');
-      }, 2800);
-    }, 1400);
+    const t = document.querySelector('.hero-title');
+    if (t) staggerIn(t, 150);
   }
 
   /* 見出しのIOリビール（文字分割対象） */
@@ -536,7 +348,7 @@
 
   /* ── 汎用リビール ── */
   const revealTargets = document.querySelectorAll(
-    '.st-line, .sec-label, .sec-lede, .mi-list li, .mi-statement, .cv-item, .vi-copy, .wm-note, .sn-item, .svc-card, .ca-head, .ca-sub, .case-row, .case-note, .iv-point, .tl-item, .tl-quote, .stat, .rs-card, .eq-card, .data-cell, .msg-body p, .msg-sign2, .iv-meti, .tr-case, .co-table > div, .fin-mail, .df-row, .ci-row, .cp-block, .mx-wrap, .mx-note, .eg-card, .eg-note, .fin-note, .pf, .sv-item, .pq, .tick-wrap, .cl-band, .cl-note, .adv, .svc-card2, .bp-card, .sd-sol, .sd-ap, .sd-lead, .cd-block, .cd-svcs, .cnav, .back-link, .cst p, .jd-mission p, .jd-step, .jd-spec > div, .jd-note, .pos-col, .issue-grid > *'
+    '.st-line, .sec-label, .sec-lede, .mi-list li, .mi-statement, .cv-item, .vi-copy, .wm-note, .sn-item, .svc-card, .ca-head, .ca-sub, .case-row, .case-note, .iv-point, .tl-item, .tl-quote, .stat, .rs-card, .eq-card, .data-cell, .msg-body p, .msg-sign2, .iv-meti, .tr-case, .co-table > div, .fin-mail, .df-row, .ci-row, .cp-block, .mx-wrap, .mx-note, .eg-card, .eg-note, .fin-note, .pf, .sv-item, .pq, .tick-wrap, .cl-band, .cl-note, .adv, .svc-card2, .bp-card, .sd-sol, .sd-ap, .sd-lead, .cd-block, .cd-svcs, .cnav, .back-link, .cst p, .jd-mission p, .jd-step, .jd-spec > div, .jd-note, .pos-col'
   );
   revealTargets.forEach((el) => el.classList.add('reveal-el'));
   const revealIO = new IntersectionObserver((entries) => {
@@ -554,11 +366,6 @@
   /* リスト系は行ごとに時差 */
   document.querySelectorAll('.case-row, .rs-card, .eq-card, .mi-list li, .ci-row, .df-row, .eg-card, .sv-item, .adv, .svc-card2, .bp-card, .sd-sol, .sd-ap').forEach((el, i) => {
     el.style.transitionDelay = `${(i % 12) * 0.05}s`;
-  });
-  ['.issue-grid > *', '.cv-item', '.sn-item'].forEach((selector) => {
-    document.querySelectorAll(selector).forEach((el, i) => {
-      el.style.transitionDelay = `${(i % 12) * 0.06}s`;
-    });
   });
 
   /* ── ロゴマーキー：シームレスループ用に複製 ── */
@@ -913,4 +720,72 @@
   }
 
   onScroll();
+})();
+
+/* ── 求人フィルター（採用情報） ── */
+(() => {
+  const bar = document.querySelector('.jb-filter');
+  if (!bar) return;
+  const rows = [...document.querySelectorAll('.jb-row')];
+  const menus = [...bar.querySelectorAll('.jb-menu')];
+  const pills = [...bar.querySelectorAll('.jb-pill')];
+  const countEl = bar.querySelector('.jb-count b');
+  const clearBtn = bar.querySelector('.jb-clear');
+  const state = { div: new Set(), loc: new Set() };
+
+  const closeMenus = () => {
+    menus.forEach((m) => m.classList.remove('open'));
+    pills.forEach((p) => p.classList.remove('on'));
+  };
+  pills.forEach((p) => {
+    p.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const menu = bar.querySelector(`.jb-menu[data-for="${p.dataset.menu}"]`);
+      const wasOpen = menu.classList.contains('open');
+      closeMenus();
+      if (!wasOpen) {
+        menu.style.left = Math.max(0, Math.min(p.offsetLeft, bar.clientWidth - menu.offsetWidth)) + 'px';
+        menu.classList.add('open');
+        p.classList.add('on');
+      }
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.jb-menu')) closeMenus();
+  });
+
+  const apply = () => {
+    let visible = 0;
+    rows.forEach((r) => {
+      const okDiv = !state.div.size || (r.dataset.div || '').split(' ').some((v) => state.div.has(v));
+      const okLoc = !state.loc.size || (r.dataset.loc || '').split(' ').some((v) => state.loc.has(v));
+      const ok = okDiv && okLoc;
+      r.classList.toggle('hide', !ok);
+      if (ok) visible++;
+    });
+    document.querySelectorAll('.rc-division').forEach((sec) => {
+      const any = [...sec.querySelectorAll('.jb-row')].some((r) => !r.classList.contains('hide'));
+      sec.classList.toggle('hide', !any);
+    });
+    if (countEl) countEl.textContent = visible;
+    pills.forEach((p) => p.setAttribute('data-n', state[p.dataset.menu].size));
+    if (clearBtn) clearBtn.style.visibility = state.div.size || state.loc.size ? 'visible' : 'hidden';
+  };
+  menus.forEach((m) => {
+    m.addEventListener('change', (e) => {
+      const key = m.dataset.for;
+      if (e.target.checked) state[key].add(e.target.value);
+      else state[key].delete(e.target.value);
+      apply();
+    });
+  });
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      state.div.clear();
+      state.loc.clear();
+      menus.forEach((m) => m.querySelectorAll('input').forEach((i) => (i.checked = false)));
+      apply();
+    });
+  }
+  apply();
 })();
