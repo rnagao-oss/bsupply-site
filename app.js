@@ -7,7 +7,11 @@
   if (loader && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     loader.remove();
     setTimeout(revealHeroTitle, 150);
+  } else if (loader && sessionStorage.getItem('bs-loaded')) {
+    loader.remove();
+    setTimeout(revealHeroTitle, 150);
   } else if (loader) {
+    try { sessionStorage.setItem('bs-loaded', '1'); } catch (e) {}
     const word = document.getElementById('ldWord');
     const chars = [...word.textContent].map((ch) => {
       const s = document.createElement('span');
@@ -144,31 +148,6 @@
     })(0);
   })();
 
-  /* ── カーソルオーブ（IP風マウス追従） ── */
-  (() => {
-    if (matchMedia('(pointer: coarse)').matches) return;
-    const orb = document.createElement('div');
-    orb.className = 'cursor-orb';
-    document.body.appendChild(orb);
-    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, seen = false;
-    addEventListener('pointermove', (e) => {
-      tx = e.clientX; ty = e.clientY;
-      if (!seen) { x = tx; y = ty; seen = true; }
-    }, { passive: true });
-    addEventListener('pointerdown', () => orb.classList.add('is-down'));
-    addEventListener('pointerup', () => orb.classList.remove('is-down'));
-    const HOVER = 'a, button, summary, .orbit-node, input, textarea, label';
-    document.addEventListener('pointerover', (e) => {
-      orb.classList.toggle('is-hover', !!e.target.closest(HOVER));
-    });
-    (function follow() {
-      requestAnimationFrame(follow);
-      x += (tx - x) * 0.16;
-      y += (ty - y) * 0.16;
-      orb.style.left = `${x}px`;
-      orb.style.top = `${y}px`;
-    })();
-  })();
 
   /* ── モバイルメニュー ── */
   const menuBtn = document.getElementById('menuBtn');
