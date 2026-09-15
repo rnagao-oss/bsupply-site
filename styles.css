@@ -2660,3 +2660,8 @@ body.menu-open .brand-mark { filter: none; }
 @media (max-width: 700px) {
   .cv-en { white-space: normal; overflow-wrap: anywhere; }
 }
+
+/* スマホ・タブレット（タッチ端末）ではスクロール出現アニメーションを使わない（2026-09-15 永尾指示） */
+@media (pointer: coarse), (max-width: 760px) {
+  .reveal-el, .char, .tok, .tl-item { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+}
