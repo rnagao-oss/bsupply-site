@@ -1,0 +1,273 @@
+/* p3-sme-bpo.css — sme-bpo.html だけの調整（biz3.css の後に読み込む） */
+
+/* styles.css の汎用ルール（li の max-width 40em・a の色の継承）を打ち消す */
+.b3 :where(li, dd, dt) { max-width: none; }
+.b3 a.b3-btn { color: #fff; }
+.b3 a.b3-btn--light, .b3 a.b3-btn--ghost { color: var(--b3-ink); }
+.b3 a.b3-btn--accent { color: #fff; }
+
+/* ヒーロー */
+.b3 { --b3-max: 1200px; }
+.b3 .b3-lp { padding-top: 8rem; padding-bottom: 3rem; background: var(--b3-soft); }
+.b3 .b3-lp-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem; align-items: end; }
+.b3 .b3-lp-copy { align-self: center; padding-block: 1rem 2rem; }
+.b3 .b3-lp-kicker { color: var(--b3-acc); font-size: clamp(.95rem, 1.7vw, 1.4rem); font-weight: 700; line-height: 1.7; letter-spacing: 0; }
+.b3 .b3-lp h1 { margin-top: .3rem; font-size: clamp(2.4rem, 4.05vw, 3.65rem); line-height: 1.35; letter-spacing: -.04em; }
+.b3 .b3-lp h1 .b3-lp-mask { display: block; overflow: hidden; padding-bottom: .08em; }
+.b3 .b3-lp h1 .b3-lp-mask > span { display: block; white-space: nowrap; }
+html.js .b3 .b3-lp h1 .b3-lp-mask > span { transform: translateY(110%); transition: transform .9s var(--b3-ease); }
+html.js .b3 .b3-lp.in h1 .b3-lp-mask > span { transform: none; }
+.b3 .b3-lp-price strong { color: var(--b3-acc); }
+.b3 .b3-lp .b3-lp-price { gap: .15rem; margin-top: 1.1rem; }
+.b3 .b3-lp .b3-lp-price strong { font-size: clamp(1.8rem, 2.5vw, 2.25rem); }
+.b3 .b3-lp .b3-lp-price span { font-size: clamp(1.1rem, 1.75vw, 1.5rem); color: var(--b3-ink); font-weight: 700; white-space: nowrap; }
+.b3 .b3-lp-desc { font-size: clamp(1rem, 1.8vw, 1.5rem); font-weight: 700; line-height: 1.6; }
+.b3 .b3-lp-proofs { display: grid; grid-template-columns: repeat(3, 1fr); width: min(100%, 31rem); gap: .1rem; margin-top: .9rem; }
+.b3 .b3-lp-proofs li { position: relative; display: grid; place-items: center; color: var(--b3-acc); }
+.b3 .b3-lp-proofs svg { width: 100%; }
+.b3 .b3-lp-proofs li > span { position: absolute; inset: 20% 20%; display: grid; place-content: center; font-size: clamp(.75rem, 1.05vw, .95rem); line-height: 1.6; text-align: center; font-weight: 700; word-break: auto-phrase; }
+.b3 .b3-lp .b3-lp-actions { display: flex; flex-direction: column; gap: 1rem; width: min(100%, 27rem); margin-top: 1.6rem; }
+.b3 .b3-lp .b3-btn { justify-content: center; min-height: 3.6rem; padding: .8rem 3rem; border-radius: 999px; font-size: 1.15rem; position: relative; }
+.b3 .b3-lp .b3-btn::after { position: absolute; right: 1rem; }
+.b3 .b3-lp .b3-consult::after { display: none; }
+.b3 .b3-lp a.b3-btn--ghost { background: #fff; color: var(--b3-acc); box-shadow: inset 0 0 0 2px var(--b3-acc); }
+.b3 .b3-adviser { position: absolute; width: 4.3rem; height: 4.7rem; left: .7rem; bottom: 0; }
+.b3 .b3-lp-visual { aspect-ratio: 4 / 5; max-height: 37rem; background: transparent; border-radius: 0; margin-bottom: -3rem; }
+.b3 .b3-lp-visual img { border-radius: 0; object-fit: cover; object-position: center top; animation: none; transform: none; mix-blend-mode: multiply; mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+.b3 .b3-lp-badge { left: auto; right: 0; bottom: 2rem; border-radius: var(--b3-r); background: #fff; color: var(--b3-acc); box-shadow: 0 0 0 2px var(--b3-acc); padding: .9rem 1.2rem; }
+.b3 .b3-lp-badge em { font-size: 1.3rem; }
+.b3 .b3-lp .b3-crumb { position: static; width: min(100%, var(--b3-max)); margin: .7rem auto 0; }
+body:has(.b3) .site-header nav { gap: clamp(1rem, 1.7vw, 1.7rem); }
+.b3 .b3-mq-wrap--chips { padding-block: 1rem; }
+
+
+.b3 .b3-lp a.b3-consult { background: #fff; color: var(--b3-ink); box-shadow: inset 0 0 0 2px var(--b3-ink); }
+@media (max-width: 600px) {
+  .b3 .b3-lp { padding-top: 7rem; }
+  .b3 .b3-lp-in { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+  .b3 .b3-lp-copy { min-width: 0; }
+  .b3 .b3-lp h1 { font-size: clamp(1.7rem, 8.3vw, 2.9rem); }
+  .b3 .b3-lp h1 .b3-lp-mask > span { white-space: nowrap; }
+  .b3 .b3-lp .b3-crumb { position: static; width: min(100%, var(--b3-max)); margin: 2rem auto 0; }
+}
+@media (max-width: 960px) and (min-width: 601px) {
+  .b3 .b3-lp-in { grid-template-columns: 1fr; }
+  .b3 .b3-lp-visual { width: min(100%, 42rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .b3 .b3-lp h1 .b3-lp-mask > span { transform: none; stroke-dashoffset: 0; transition: none; }
+}
+@media (max-width: 960px) {
+  .b3 .b3-lp-in { grid-template-columns: 1fr; gap: 1rem; }
+  .b3 .b3-lp-copy { width: min(100%, 38rem); margin-inline: auto; }
+  .b3 .b3-lp-visual { width: min(100%, 29rem); margin-inline: auto; max-height: none; }
+}
+@media (max-width: 600px) {
+  .b3 .b3-lp { padding-bottom: 1.5rem; }
+  .b3 .b3-lp-copy { padding-block: 0; }
+  .b3 .b3-lp-kicker { font-size: .94rem; line-height: 1.8; }
+  .b3 .b3-lp .b3-lp-price strong { font-size: 1.65rem; }
+  .b3 .b3-lp .b3-lp-price span { font-size: 1.06rem; }
+  .b3 .b3-lp-desc { font-size: .98rem; }
+  .b3 .b3-lp-proofs li > span { font-size: .76rem; }
+  .b3 .b3-lp .b3-btn { font-size: 1rem; padding-inline: 3rem; }
+  .b3 .b3-lp .b3-lp-actions { width: 100%; margin-top: 1.4rem; }
+  .b3 .b3-lp-visual { margin: 1rem auto -1.5rem; }
+  .b3 .b3-lp-badge { right: .3rem; bottom: 1.5rem; padding: .75rem 1rem; }
+  .b3 .b3-lp-badge em { font-size: 1rem; }
+  .b3 .b3-lp .b3-crumb { position: relative; margin-top: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .b3 .b3-lp-badge { opacity: 1; transform: none; }
+}
+
+.b3 .b3-lp h1 .b3-lp-mask > span span { display: inline; white-space: inherit; }
+.b3 .b3-lp-proofs li > span { inset: 15% 13%; font-size: clamp(.7rem, .98vw, .88rem); }
+.b3 .b3-lp-proofs li > span > span { white-space: nowrap; }
+@media (max-width: 600px) {
+  .b3 .b3-lp-proofs li > span { inset-inline: 10%; font-size: .68rem; }
+}
+/* ヒーローが明るいので、ページ最上部でもロゴを白抜きにしない */
+.site-header:not(.scrolled) .brand-mark { filter: none; }
+
+/* 見出し */
+.b3 .b3-label, .b3 .b3-kicker { color: var(--b3-muted); }
+.b3 .b3-label { font-size: .95rem; letter-spacing: .16em; font-weight: 600; }
+.b3 .b3-kicker { font-size: .9rem; }
+.b3 :is(#features, #comparison, #tasks, #flow, #faq) .b3-head { text-align: center; }
+.b3 :is(#comparison, #tasks, #flow, #faq) .b3-lede { margin-inline: auto; }
+
+/* 課題とサービス概要 */
+.b3 .b3-pain-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 5rem; align-items: start; }
+.b3 .b3-pain { display: block; }
+.b3 .b3-pain > li { padding: 1.4rem 0; border-top: 1px solid var(--b3-soft-2); font-size: clamp(1.1rem, 1.5vw, 1.3rem); font-weight: 700; line-height: 1.7; }
+.b3 .b3-pain > li:last-child { border-bottom: 1px solid var(--b3-soft-2); }
+.b3 .b3-pain-copy, .b3 .b3-pain-copy .b3-body { font-size: 1rem; line-height: 1.9; }
+.b3 .b3-pain-copy p + p { margin-top: 1.3rem; }
+.b3 .b3-pain-copy .b3-pain-lead { margin-top: 1.8rem; text-align: left; font-size: 1rem; font-weight: 700; }
+
+/* 特徴：写真と黒い図解を同じ比率で並べる */
+.b3 .b3-ft { gap: clamp(4rem, 7vw, 6rem); }
+.b3 .b3-ft-item { min-height: 0; padding: 0; background: transparent; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; align-items: center; }
+.b3 .b3-ft-item:nth-child(even) .b3-ft-copy { order: -1; }
+.b3 .b3-ft-visual { width: 100%; aspect-ratio: 4 / 3; border-radius: var(--b3-r); overflow: hidden; }
+.b3 .b3-ft-photo img { width: 100%; height: 100%; object-fit: cover; }
+.b3 .b3-ft-copy h3 { margin: 0 0 1.2rem; font-size: clamp(1.5rem, 2.3vw, 2rem); line-height: 1.5; }
+.b3 .b3-ft-copy h3 > span { display: block; }
+.b3 .b3-ft-copy h3 .b3-ft-accent { color: var(--b3-ink-2); }
+.b3 .b3-ft-description { padding: 0; background: none; }
+.b3 .b3-ft-description p { margin: 0; max-width: none; }
+.b3 .b3-ft-points li::before { color: var(--b3-ink); }
+.b3 .b3-ft-loop, .b3 .b3-ft-tasks { display: flex; flex-direction: column; justify-content: center; padding: clamp(1rem, 2.4vw, 2.2rem); background: var(--b3-ink); color: #fff; }
+
+/* 料金帯 */
+.b3 .b3-price-band .b3-lp-price strong { color: #fff; }
+.b3 .b3-price-band a.b3-btn--accent { background: #fff; color: var(--b3-ink); }
+.b3 .b3-price-band a.b3-btn--accent::after { background: var(--b3-ink); color: #fff; }
+.b3 .b3-price-band .b3-tile-en,
+.b3 .b3-price-band .b3-lp-price span,
+.b3 .b3-price-band p.b3-tile-p { color: #fff; }
+
+/* 業務一覧と対応ツール */
+.b3 .b3-task-row { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1.8rem; padding: 1.4rem 0; border-top: 1px solid var(--b3-soft-2); }
+.b3 .b3-task-row:last-child { border-bottom: 1px solid var(--b3-soft-2); }
+.b3 .b3-task-row dt { font-weight: 700; line-height: 1.9; }
+.b3 .b3-task-row dd ul { display: flex; flex-wrap: wrap; gap: .4rem 1.8rem; font-size: .95rem; line-height: 1.9; }
+.b3 .b3-tools-h { margin-top: 3rem; font-size: .9rem; letter-spacing: .08em; color: var(--b3-muted); }
+.b3 .b3-tools-lede { margin-top: .8rem; font-size: 1rem; line-height: 1.9; color: var(--b3-ink-2); }
+.b3 .b3-tools { display: flex; flex-wrap: wrap; gap: .6rem 2rem; margin-top: 1.4rem; color: var(--b3-ink-2); }
+.b3 .b3-tools li, .b3 .b3-tools li:hover { padding: 0; border-radius: 0; background: none; color: inherit; }
+
+/* 流れ：丸の中心を線で結ぶ */
+.b3 #flow .b3-flow { gap: clamp(.8rem, 1.8vw, 1.6rem); }
+.b3 #flow .b3-flow::before { top: 33px; }
+.b3 #flow .b3-flow-no { width: 66px; margin-bottom: 1.2rem; box-shadow: 0 0 0 7px var(--b3-soft); }
+.b3 #flow .b3-flow-h { font-size: clamp(1rem, 1.35vw, 1.2rem); }
+.b3 #flow .b3-flow-p { max-width: 18em; font-size: .95rem; }
+
+/* FAQとお問い合わせ */
+.b3 #faq .b3-faq { max-width: 900px; margin-inline: auto; }
+.b3 .b3-faq details { overflow: hidden; }
+.b3 .b3-faq details > p { will-change: height; }
+
+@media (max-width: 1100px) and (min-width: 961px) {
+  .b3 #flow .b3-flow-p { max-width: 14em; }
+}
+@media (max-width: 960px) {
+  .b3 .b3-pain-grid, .b3 .b3-ft-item, .b3 .b3-task-row, .b3 .b3-price-band { grid-template-columns: minmax(0, 1fr); }
+  .b3 .b3-pain-grid { gap: 2rem; }
+  .b3 .b3-ft-item { gap: 1.8rem; }
+  .b3 .b3-ft-item:nth-child(even) .b3-ft-copy { order: 0; }
+  .b3 .b3-task-row { gap: .7rem; }
+  .b3 #flow .b3-flow { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .b3 #flow .b3-flow::before { display: block; top: 32px; bottom: 32px; left: 32px; right: auto; width: 2px; height: auto; }
+  .b3 #flow .b3-flow > li { display: grid; grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 1rem; text-align: left; align-items: start; }
+  .b3 #flow .b3-flow-no { grid-column: 1; grid-row: 1 / span 2; width: 64px; margin: 0; }
+  .b3 #flow .b3-flow-h { grid-column: 2; grid-row: 1; margin-bottom: .45rem; }
+  .b3 #flow .b3-flow-p { grid-column: 2; grid-row: 2; max-width: none; }
+}
+
+/* 比較表 */
+.b3 .b3-vt { margin-top: clamp(2rem, 3.5vw, 3rem); display: grid; grid-template-columns: minmax(12.4rem, 1fr) repeat(4, minmax(0, 1.05fr)); grid-template-rows: auto; grid-auto-rows: 1fr; column-gap: 6px; }
+.b3 .b3-vt-row { display: contents; }
+.b3 .b3-vt-l { display: flex; align-items: center; gap: .9rem; padding: 1.1rem 1rem 1.1rem 0; font-size: .95rem; font-weight: 700; box-shadow: 0 1px 0 rgba(255,255,255,.16); }
+.b3 .b3-vt-head .b3-vt-l { box-shadow: none; }
+.b3 .b3-vt-no { font: 500 .72rem/1 var(--b3-en); letter-spacing: .1em; font-variant-numeric: tabular-nums; color: rgba(255,255,255,.55); }
+.b3 .b3-vt-c { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .55rem; min-height: 5rem; padding: .9rem 1.1rem; text-align: center; color: rgba(255,255,255,.76); background: rgba(255,255,255,.04); box-shadow: 0 1px 0 rgba(255,255,255,.16); }
+.b3 .b3-vt-c .b3-mk { order: -1; flex: none; }
+.b3 .b3-vt-c p { font-size: .92rem; line-height: 1.6; overflow-wrap: break-word; }
+.b3 .b3-vt-th { min-height: 4.4rem; border-radius: 12px 12px 0 0; background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
+.b3 .b3-vt-th strong { font-size: 1.05rem; font-weight: 700; }
+.b3 .b3-vt-c.is-us { color: #fff; background: rgba(255,255,255,.12); box-shadow: inset 2px 0 0 rgba(255,255,255,.9), inset -2px 0 0 rgba(255,255,255,.9), 0 1px 0 rgba(255,255,255,.16); }
+.b3 .b3-vt-c.is-us p { font-weight: 700; }
+.b3 .b3-vt-th.is-us { background: #fff; color: var(--b3-ink); box-shadow: none; }
+.b3 .b3-vt-th.is-us strong { font-size: 1.3rem; }
+.b3 .b3-vt-row:last-child .b3-vt-c.is-us { border-radius: 0 0 12px 12px; box-shadow: inset 2px 0 0 rgba(255,255,255,.9), inset -2px 0 0 rgba(255,255,255,.9), inset 0 -2px 0 rgba(255,255,255,.9); }
+.b3 .b3-vt .b3-mk, .b3 .b3-tb-legend .b3-mk { width: 16px; height: 16px; }
+.b3 .b3-vt .b3-mk-a, .b3 .b3-tb-legend .b3-mk-a { box-shadow: inset 0 0 0 2px rgba(255,255,255,.9); }
+.b3 .b3-vt .b3-mk-a::after, .b3 .b3-tb-legend .b3-mk-a::after { inset: 4.5px; box-shadow: inset 0 0 0 2px rgba(255,255,255,.9); }
+.b3 .b3-vt .b3-mk-b, .b3 .b3-tb-legend .b3-mk-b { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.55); }
+.b3 .b3-vt .b3-mk-c, .b3 .b3-tb-legend .b3-mk-c { background: rgba(255,255,255,.6); }
+.b3 .b3-vt .b3-mk-c::before, .b3 .b3-tb-legend .b3-mk-c::before { background: #222221; }
+.b3 .b3-vt .b3-mk-d::before, .b3 .b3-vt .b3-mk-d::after, .b3 .b3-tb-legend .b3-mk-d::before, .b3 .b3-tb-legend .b3-mk-d::after { width: 17px; background: rgba(255,255,255,.6); }
+.b3 .b3-vt-c.is-us .b3-mk-a { box-shadow: inset 0 0 0 2px rgba(255,255,255,.9); }
+.b3 .b3-vt-c.is-us .b3-mk-a::after { box-shadow: inset 0 0 0 2px rgba(255,255,255,.9); }
+.b3 #comparison .b3-tb-legend > div { color: rgba(255,255,255,.7); }
+@media (max-width: 960px) {
+  .b3 .b3-vt { margin-inline: calc(-1 * var(--b3-gutter) + 10px); grid-template-columns: 4.4rem repeat(4, minmax(0, 1fr)); column-gap: 3px; }
+  .b3 .b3-vt-c { overflow: hidden; }
+  .b3 .b3-vt-c p br { display: none; }
+  .b3 .b3-vt-l { min-width: 0; padding: .5rem .2rem .5rem 0; font-size: .62rem; line-height: 1.4; word-break: normal; overflow-wrap: anywhere; }
+  .b3 .b3-vt-no { display: none; }
+  .b3 .b3-vt-c { gap: .3rem; min-height: 4.6rem; padding: .55rem .25rem; min-width: 0; }
+  .b3 .b3-vt-c p { align-self: stretch; min-width: 0; max-width: 100%; font-size: .58rem; line-height: 1.45; word-break: normal; line-break: auto; overflow-wrap: anywhere; }
+  .b3 .b3-vt-th { min-height: 3.4rem; border-radius: 10px 10px 0 0; padding: .6rem .2rem; }
+  .b3 .b3-vt-th strong { font-size: .68rem; line-height: 1.3; }
+  .b3 .b3-vt-th.is-us strong { font-size: .8rem; }
+  .b3 .b3-vt .b3-mk { width: 12px; height: 12px; }
+  .b3 .b3-vt .b3-mk-a::after { inset: 3px; }
+  .b3 .b3-vt .b3-mk-d::before, .b3 .b3-vt .b3-mk-d::after { width: 12px; }
+}
+.b3 .b3-vt-c .nowrap, .b3 .b3-vt-c p .nowrap { white-space: normal; }
+
+
+/* 黒い図解 */
+.b3 .b3-loop-h { margin: 0 0 1.2rem; font-size: .85rem; font-weight: 700; letter-spacing: .08em; color: #fff; }
+.b3 .b3-loop { position: relative; display: grid; }
+.b3 .b3-loop::after { content: "毎月くり返す"; position: absolute; right: .95rem; top: 50%; transform: translateY(-50%); writing-mode: vertical-rl; font-size: .8rem; font-weight: 700; letter-spacing: .24em; color: #fff; }
+.b3 .b3-loop li { position: relative; padding: 0 3.8rem .65rem 2.3rem;
+  background:
+    linear-gradient(#fff, #fff) right 0 top 0 / 2px 100% no-repeat,
+    linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)) left .4rem top 1.3rem / 2px calc(100% - 1.15rem) no-repeat; }
+.b3 .b3-loop li:first-child { background:
+    linear-gradient(#fff, #fff) right 0 top .78rem / 2px calc(100% - .78rem) no-repeat,
+    linear-gradient(#fff, #fff) right 0 top .78rem / 1.5rem 2px no-repeat,
+    linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)) left .4rem top 1.3rem / 2px calc(100% - 1.15rem) no-repeat; }
+.b3 .b3-loop li:last-child { padding-bottom: 0; background:
+    linear-gradient(#fff, #fff) right 0 top 0 / 2px .8rem no-repeat,
+    linear-gradient(#fff, #fff) right 0 top .78rem / 1.5rem 2px no-repeat; }
+.b3 .b3-loop li::before { content: ""; position: absolute; left: 0; top: .33rem; width: .9rem; height: .9rem; border-radius: 50%; background: var(--b3-ink); box-shadow: inset 0 0 0 2px #fff; }
+.b3 .b3-loop li:last-child::before { background: #fff; box-shadow: none; }
+.b3 .b3-loop li:first-child::after { content: ""; position: absolute; right: 1.35rem; top: calc(.78rem - 5px); width: 8px; height: 12px; background: #fff; clip-path: polygon(100% 0, 0 50%, 100% 100%); }
+.b3 .b3-loop b { display: block; font-size: .95rem; font-weight: 700; line-height: 1.5; }
+.b3 .b3-loop li > span { display: block; margin-top: .1rem; font-size: .8rem; font-weight: 400; line-height: 1.6; color: #fff; }
+
+/* Feature 03: task list on dark card */
+.b3 .b3-task-list li { display: flex; align-items: center; gap: .9rem; padding: 1rem 0; font-size: .98rem; font-weight: 700; line-height: 1.6; color: #fff;
+  background: linear-gradient(rgba(255,255,255,.22), rgba(255,255,255,.22)) left bottom / 100% 1px no-repeat; }
+.b3 .b3-task-list li:last-child { background: none; padding-bottom: 0; }
+.b3 .b3-task-list li:first-child { padding-top: 0; }
+.b3 .b3-task-list li::before { content: ""; flex: none; width: .9rem; height: 2px; background: #fff; }
+
+/* FEATURES：3つの特徴を先にボックスで並べ、各ボックスから詳細へ移動する */
+.b3 .b3-ft-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: clamp(3.5rem, 6vw, 5rem); }
+.b3 .b3-ft-sum a { position: relative; display: flex; flex-direction: column; gap: .8rem; height: 100%; padding: clamp(1.4rem, 2.2vw, 2rem) clamp(1.3rem, 2vw, 1.8rem) clamp(3.2rem, 4vw, 3.6rem); border-radius: var(--b3-r); background: #fff; color: var(--b3-ink); }
+.b3 .b3-ft-sum h3 { font-size: clamp(1.05rem, 1.5vw, 1.25rem); font-weight: 700; line-height: 1.5; }
+.b3 .b3-ft-sum p { font-size: .92rem; line-height: 1.85; color: var(--b3-ink-2); }
+.b3 .b3-ft-sum i { position: absolute; right: clamp(1.3rem, 2vw, 1.8rem); bottom: 1.2rem; font: 500 1rem/1 var(--b3-en); font-style: normal; color: var(--b3-muted); transition: transform .5s var(--b3-ease); }
+@media (hover: hover) and (pointer: fine) { .b3 .b3-ft-sum a:hover i { transform: translateY(4px); } }
+.b3 .b3-ft-item { scroll-margin-top: 6rem; }
+@media (max-width: 860px) {
+  .b3 .b3-ft-sum { grid-template-columns: 1fr; }
+  .b3 .b3-ft-sum a { padding-bottom: clamp(3rem, 8vw, 3.4rem); }
+}
+
+/* PRICE：3つの条件は枠とアイコンを使わず、明朝の見出しと本文だけで並べる */
+.b3 .b3-price-points { gap: clamp(2rem, 4vw, 4rem); margin-top: clamp(2.5rem, 4.5vw, 4rem); padding-inline: clamp(1.8rem, 3.2vw, 3rem); }
+.b3 .b3-price-points li { display: block; padding: 0; border-radius: 0; background: none; }
+.b3 .b3-pp-h { font-family: var(--b3-mincho); font-size: clamp(1.4rem, 2.2vw, 1.9rem); font-weight: 500; line-height: 1.4; letter-spacing: .04em; }
+.b3 .b3-pp-p { margin-top: .9rem; max-width: 22em; font-size: .92rem; line-height: 1.9; }
+
+
+@media (max-width: 600px) {
+  .b3 .b3-ft-loop, .b3 .b3-ft-tasks { padding: 1rem; }
+  .b3 .b3-loop-h { margin-bottom: .65rem; font-size: .8rem; }
+  .b3 .b3-loop li { padding: 0 2.7rem .55rem 1.5rem; }
+  .b3 .b3-loop li:last-child { padding-bottom: 0; }
+  .b3 .b3-loop b { font-size: .85rem; line-height: 1.35; }
+  .b3 .b3-loop li > span { font-size: .72rem; line-height: 1.5; }
+  .b3 .b3-loop::after { right: .6rem; font-size: .7rem; }
+  .b3 .b3-task-list li { gap: .6rem; padding-block: .65rem; font-size: .82rem; }
+  .b3 .b3-task-list li:first-child { padding-top: 0; }
+  .b3 .b3-task-list li:last-child { padding-bottom: 0; }
+}

@@ -1,0 +1,21 @@
+/* VIEW MORE：事業カード下の導線。黒い帯＋白文字＋矢印を常時表示し、カードに乗せると矢印が少し進む */
+.bb-card .bb-more { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: .9rem; align-self: flex-start; margin-top: auto; padding: 0 0 0 1.5rem; background: none; color: #fff; font: 700 .72rem/1 var(--en, "Instrument Sans", sans-serif); letter-spacing: .14em; white-space: nowrap; }
+.bb-card .bb-body { align-items: flex-start; }
+.bb-card .bb-body .bb-text { margin-bottom: 1.4rem; }
+.bb-card .bb-more::before { content: ""; position: absolute; z-index: -1; inset: 0; border-radius: 999px; background: #0f0f0e; }
+.bb-card .bb-more::after { content: "→"; display: grid; place-items: center; flex: none; width: 2.4rem; aspect-ratio: 1; color: #fff; font: 700 .9rem/1 sans-serif; letter-spacing: 0; transition: transform .6s cubic-bezier(.19, 1, .22, 1); }
+@media (hover: hover) and (pointer: fine) {
+  .bb-card:hover .bb-more::after { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bb-card .bb-more::after { transition: none; }
+}
+
+/* BPOカード：写真の代わりにヒーローの文言パネル */
+.bb-img.bb-typo { container-type: inline-size; display: flex; flex-direction: column; justify-content: center; gap: .9rem; padding: 0 7%; background: #f4f2ee; font-family: "Noto Sans JP", sans-serif; color: #0f0f0e; }
+.bb-typo b { font-size: 4.6cqw; font-weight: 700; line-height: 1.4; color: #ff6a1a; letter-spacing: 0; }
+.bb-typo strong { font-size: 10.4cqw; font-weight: 700; line-height: 1.15; letter-spacing: 0; }
+.bb-typo .bb-typo-price { font-size: 5.2cqw; font-weight: 700; line-height: 1.3; }
+.bb-typo .bb-typo-price em { font-style: normal; font-size: 9.6cqw; color: #ff6a1a; margin-right: .15em; }
+.bb-typo .bb-typo-sub { font-size: 5.2cqw; font-weight: 700; line-height: 1.4; }
+.bb-card:hover .bb-typo { transform: none; }
