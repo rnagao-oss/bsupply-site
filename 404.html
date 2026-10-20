@@ -19,7 +19,7 @@
   var path = en ? p.slice(3) : p;
   var last = path.split('/').pop();
   if (last.indexOf('.') !== -1) return; /* 新形式（拡張子付き）URLは404を表示 */
-  var root = en ? '/en/' : '/';
+  var root = '/'; /* 英語版は廃止。/en/ 配下は日本語版へ */
   var rules = [
     [/^\/(company|about|profile|corporate|gaiyou|outline)/i, 'company.html'],
     [/^\/(contact|inquiry|otoiawase)/i, 'contact.html'],
